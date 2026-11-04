@@ -1,0 +1,56 @@
+{
+  "name": "@epistemics/opendiscovery-scientific-research",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Evidence-based research and writing workflows for OpenDiscovery.",
+  "author": "General Epistemics",
+  "license": "SEE LICENSE IN THIRD_PARTY_NOTICES.md",
+  "opendiscovery": {
+    "apiVersion": 2,
+    "contributes": {
+      "panel": {
+        "id": "scientific-research",
+        "name": "Scientific Research",
+        "icon": "book-open"
+      },
+      "skills": [
+        {
+          "id": "literature-review",
+          "path": "skills/literature-review"
+        },
+        {
+          "id": "research-lookup",
+          "path": "skills/research-lookup"
+        },
+        {
+          "id": "citations",
+          "path": "skills/citations"
+        },
+        {
+          "id": "sources",
+          "path": "skills/sources"
+        },
+        {
+          "id": "paper-writing",
+          "path": "skills/paper-writing"
+        },
+        {
+          "id": "peer-review",
+          "path": "skills/peer-review"
+        },
+        {
+          "id": "brainstorming",
+          "path": "skills/brainstorming"
+        },
+        {
+          "id": "hypotheses",
+          "path": "skills/hypotheses"
+        },
+        {
+          "id": "experimental-design",
+          "path": "skills/experimental-design"
+        }
+      ]
+    }
+  }
+}
