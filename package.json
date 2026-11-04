@@ -1,0 +1,196 @@
+{
+  "name": "@epistemics/opendiscovery-life-sciences-databases",
+  "version": "0.1.0",
+  "description": "Structured life-science database research for OpenDiscovery.",
+  "private": true,
+  "author": "General Epistemics",
+  "license": "SEE LICENSE IN THIRD_PARTY_NOTICES.md",
+  "opendiscovery": {
+    "apiVersion": 2,
+    "contributes": {
+      "panel": {
+        "id": "life-sciences-databases",
+        "name": "Life Sciences Databases",
+        "icon": "database"
+      },
+      "skills": [
+        {
+          "id": "alphafold-skill",
+          "path": "skills/alphafold-skill"
+        },
+        {
+          "id": "bgee-skill",
+          "path": "skills/bgee-skill"
+        },
+        {
+          "id": "bindingdb-skill",
+          "path": "skills/bindingdb-skill"
+        },
+        {
+          "id": "biobankjapan-phewas-skill",
+          "path": "skills/biobankjapan-phewas-skill"
+        },
+        {
+          "id": "biostudies-arrayexpress-skill",
+          "path": "skills/biostudies-arrayexpress-skill"
+        },
+        {
+          "id": "cbioportal-skill",
+          "path": "skills/cbioportal-skill"
+        },
+        {
+          "id": "cellxgene-skill",
+          "path": "skills/cellxgene-skill"
+        },
+        {
+          "id": "chebi-skill",
+          "path": "skills/chebi-skill"
+        },
+        {
+          "id": "chembl-skill",
+          "path": "skills/chembl-skill"
+        },
+        {
+          "id": "civic-skill",
+          "path": "skills/civic-skill"
+        },
+        {
+          "id": "clinicaltrials-skill",
+          "path": "skills/clinicaltrials-skill"
+        },
+        {
+          "id": "clinvar-variation-skill",
+          "path": "skills/clinvar-variation-skill"
+        },
+        {
+          "id": "efo-ontology-skill",
+          "path": "skills/efo-ontology-skill"
+        },
+        {
+          "id": "encode-skill",
+          "path": "skills/encode-skill"
+        },
+        {
+          "id": "ensembl-skill",
+          "path": "skills/ensembl-skill"
+        },
+        {
+          "id": "epigraphdb-skill",
+          "path": "skills/epigraphdb-skill"
+        },
+        {
+          "id": "eqtl-catalogue-skill",
+          "path": "skills/eqtl-catalogue-skill"
+        },
+        {
+          "id": "eva-skill",
+          "path": "skills/eva-skill"
+        },
+        {
+          "id": "finngen-phewas-skill",
+          "path": "skills/finngen-phewas-skill"
+        },
+        {
+          "id": "genebass-gene-burden-skill",
+          "path": "skills/genebass-gene-burden-skill"
+        },
+        {
+          "id": "gnomad-graphql-skill",
+          "path": "skills/gnomad-graphql-skill"
+        },
+        {
+          "id": "gtex-eqtl-skill",
+          "path": "skills/gtex-eqtl-skill"
+        },
+        {
+          "id": "gwas-catalog-skill",
+          "path": "skills/gwas-catalog-skill"
+        },
+        {
+          "id": "human-protein-atlas-skill",
+          "path": "skills/human-protein-atlas-skill"
+        },
+        {
+          "id": "ipd-skill",
+          "path": "skills/ipd-skill"
+        },
+        {
+          "id": "metabolights-skill",
+          "path": "skills/metabolights-skill"
+        },
+        {
+          "id": "mgnify-skill",
+          "path": "skills/mgnify-skill"
+        },
+        {
+          "id": "ncbi-clinicaltables-skill",
+          "path": "skills/ncbi-clinicaltables-skill"
+        },
+        {
+          "id": "ncbi-datasets-skill",
+          "path": "skills/ncbi-datasets-skill"
+        },
+        {
+          "id": "ncbi-entrez-skill",
+          "path": "skills/ncbi-entrez-skill"
+        },
+        {
+          "id": "opentargets-skill",
+          "path": "skills/opentargets-skill"
+        },
+        {
+          "id": "pharmgkb-skill",
+          "path": "skills/pharmgkb-skill"
+        },
+        {
+          "id": "pride-skill",
+          "path": "skills/pride-skill"
+        },
+        {
+          "id": "proteomexchange-skill",
+          "path": "skills/proteomexchange-skill"
+        },
+        {
+          "id": "pubchem-pug-skill",
+          "path": "skills/pubchem-pug-skill"
+        },
+        {
+          "id": "quickgo-skill",
+          "path": "skills/quickgo-skill"
+        },
+        {
+          "id": "rcsb-pdb-skill",
+          "path": "skills/rcsb-pdb-skill"
+        },
+        {
+          "id": "reactome-skill",
+          "path": "skills/reactome-skill"
+        },
+        {
+          "id": "rhea-skill",
+          "path": "skills/rhea-skill"
+        },
+        {
+          "id": "rnacentral-skill",
+          "path": "skills/rnacentral-skill"
+        },
+        {
+          "id": "string-skill",
+          "path": "skills/string-skill"
+        },
+        {
+          "id": "tpmi-phewas-skill",
+          "path": "skills/tpmi-phewas-skill"
+        },
+        {
+          "id": "ukb-topmed-phewas-skill",
+          "path": "skills/ukb-topmed-phewas-skill"
+        },
+        {
+          "id": "uniprot-skill",
+          "path": "skills/uniprot-skill"
+        }
+      ]
+    }
+  }
+}
