@@ -1,0 +1,6 @@
+interface:
+  display_name: "Prepare Protein Experiment"
+  short_description: "Validate, estimate, and draft a protein experiment"
+  default_prompt: "Validate this protein experiment, estimate its cost without creating it, and show me the proposed Draft payload."
+policy:
+  allow_implicit_invocation: true

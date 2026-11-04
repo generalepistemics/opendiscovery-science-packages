@@ -1,0 +1,36 @@
+{
+  "name": "@epistemics/opendiscovery-adaptyv-workflows",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Prepare, review and track Adaptyv experiments in OpenDiscovery.",
+  "author": "General Epistemics",
+  "license": "SEE LICENSE IN THIRD_PARTY_NOTICES.md",
+  "opendiscovery": {
+    "apiVersion": 2,
+    "contributes": {
+      "panel": {
+        "id": "adaptyv-workflows",
+        "name": "Adaptyv Workflows",
+        "icon": "server"
+      },
+      "skills": [
+        {
+          "id": "index",
+          "path": "skills/index"
+        },
+        {
+          "id": "prepare-experiment",
+          "path": "skills/prepare-experiment"
+        },
+        {
+          "id": "review-and-submit-experiment",
+          "path": "skills/review-and-submit-experiment"
+        },
+        {
+          "id": "track-experiment",
+          "path": "skills/track-experiment"
+        }
+      ]
+    }
+  }
+}
