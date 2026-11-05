@@ -1,6 +1,6 @@
 ---
 name: paper-writing
-description: Writes and revises scientific manuscripts, journal articles, preprints, theses, reports, in full paragraphs with the argument built from the project's actual results and sources, as a real .tex or .md file in the working folder. Use for drafting or revising a paper, a section, an abstract, a response to reviewers, or a technical report in any field. For ML conference papers use ml-paper-writing; for adding or checking references use citations; for figures use figures or schematics.
+description: Writes and revises scientific manuscripts, journal articles, preprints, theses and reports from the project's actual results and sources, as a real .tex or .md file in the working folder. Use for drafting or revising a paper, section, abstract, response to reviewers or technical report. The separately installed citations skill is an optional companion. Use available plotting and document tools for figures and formatting.
 summary: "Draft or revise a manuscript, report or thesis section as a real file, from the evidence."
 category: core
 role: workflow
@@ -68,12 +68,12 @@ the abstract last (the paper in miniature: question, approach, main result with 
 implication). Titles state the finding when the venue allows it.
 
 **Figures and tables.** Each makes one claim, named in its caption's first clause; the
-figures skill builds plots, the schematics skill renders diagrams and the generate-image
-skill renders illustrations and graphical abstracts, all with `generate_image`, never
-hand-drawn as TikZ or SVG. A report with a method section gets an overview schematic; a
-report that argues a mechanism gets a conceptual figure. When image generation is
-unavailable, leave a placeholder box with the planned caption and say what is needed to
-render it, rather than drawing it by hand. Tables carry the numbers the prose cites, with
+available plotting libraries produce data figures and available diagram tools produce
+schematics. Use an image-generation tool only when it is configured and appropriate for
+an illustration. Never invent quantitative evidence in generated artwork. A report with
+a method section benefits from an overview diagram; a mechanism claim needs a figure
+that shows its evidence. If a required renderer is unavailable, state the limitation and
+provide the intended caption without claiming a finished artifact. Tables carry the numbers the prose cites, with
 uncertainty and n. Reference every figure and table in the text before it appears.
 
 **Page balance.** Floats are placed by LaTeX, not by where they sit in the source, so
@@ -92,7 +92,7 @@ page: `pdftoppm -r 50 -png paper.pdf "$TMPDIR/pages/p"` renders thumbnails cheap
 check them for figure sizes, page balance, blank regions, overfull lines, orphaned
 headings and broken refs (`??`). `scripts/validate_format.py --file paper.pdf --venue "<venue>" --check-all` checks
 page count, margins and font size against the venue's rules where it knows them. Run the
-citations skill's `validate_bib.py` on the `.bib`. Re-read the abstract against the
+included `scripts/validate_bib.py` on the `.bib`. Re-read the abstract against the
 results table.
 
 ## Style
@@ -119,7 +119,7 @@ checklists a venue may require; `references/figures-tables.md` covers table desi
 | Cell Press | `references/cell-press-style.md` |
 | Medical journals (NEJM, Lancet, JAMA, BMJ) | `references/medical-journal-styles.md` |
 | Any journal's mechanics: lengths, abstract forms, reference styles | `references/journals-formatting.md` |
-| NeurIPS, ICML, ICLR, ACL, COLM, AAAI | load `ml-paper-writing` instead |
+| NeurIPS, ICML, ICLR, ACL, COLM, AAAI | use the current official venue template and author instructions |
 
 ## Responding to reviewers
 

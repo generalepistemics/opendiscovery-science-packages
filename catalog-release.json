@@ -1,5 +1,5 @@
 {
-  "version": "0.2.0",
+  "version": "0.2.1",
   "collections": {
     "life-sciences-databases": 44,
     "scientific-research": 9,
@@ -5482,8 +5482,9 @@
     "skills/scientific-research/paper-writing/references/nature-science-style.md": "a6957999c7ca8972d5c0c373d69eca0527eaf135ef82aade3fa1c4a2ea744060",
     "skills/scientific-research/paper-writing/references/reporting-guidelines.md": "66fa8a3f597b543302d7c8254be1c346c136a6feb70ccddfce42e27dbb6c82ac",
     "skills/scientific-research/paper-writing/references/writing-principles.md": "9c4f6474c3d6dee23e494936ebdcdfb8099c72e6e4274a40cbed58ac584ad3a5",
+    "skills/scientific-research/paper-writing/scripts/validate_bib.py": "0dc28d9cf21e7001e0ccb13f803e68944895ebc9ab74b1458ae661ad2560c8a9",
     "skills/scientific-research/paper-writing/scripts/validate_format.py": "560c50838a5369122f0588b1f26364d0f340f92b11a5a41d84649b0ec8792934",
-    "skills/scientific-research/paper-writing/SKILL.md": "d4e72f1ab3794d65c89a9933b7e02714b2f828376184f0de22971e7f02bc220b",
+    "skills/scientific-research/paper-writing/SKILL.md": "9efb22bda4cd5625acfc531275b3b681e43128837012e958ac96bda984ff0d7e",
     "skills/scientific-research/paper-writing/THIRD_PARTY_NOTICES.md": "da836def7a6271667747ae82d6d6e52cc80a9ea4ca6bebefc8ae4c792e99ce5c",
     "skills/scientific-research/peer-review/references/calibration.md": "fa830ea7004ec0ca2fe4b4946f033cfc77a8c2ef2f25340a99430e94d3fc02ab",
     "skills/scientific-research/peer-review/references/common-biases.md": "acf9dd116d743d1548004e3ed75847e1247afabddf2ea7778b5add613c99a331",
@@ -5495,7 +5496,7 @@
     "skills/scientific-research/peer-review/references/reviewer-expectations.md": "f2295b5a99cfe8f49b048416d9fa80a3f2380441a6f9e127f5e1cedbe6761def",
     "skills/scientific-research/peer-review/references/scoring-rubric.md": "0f16165041e64e4a18a4e5b2fe6d0a79a71132b83597d09bddb182e42b16b8bc",
     "skills/scientific-research/peer-review/references/statistical-pitfalls.md": "c8228b2cd6b592f6ca60ab727432a16fa1dfd7c0472ca6a9b21fc786a6241266",
-    "skills/scientific-research/peer-review/SKILL.md": "7381f9dd0fc1390ed8aff91515783dc0067492ced60ccdf267adf1d625f3f6d0",
+    "skills/scientific-research/peer-review/SKILL.md": "ae2a8aa2a4402812c41505388307321181d850f48762eb724a0a166b83a80c4b",
     "skills/scientific-research/peer-review/THIRD_PARTY_NOTICES.md": "da836def7a6271667747ae82d6d6e52cc80a9ea4ca6bebefc8ae4c792e99ce5c",
     "skills/scientific-research/research-lookup/references/literature-apis.md": "f6e767d7e85db1c261734bac1d68f4e2ca6ac49ff54a15ecc933be6179743929",
     "skills/scientific-research/research-lookup/SKILL.md": "e6de4486cc5ae14ee8407d0a782541b9baf616d33a0f29c58efca4a78519aea0",
