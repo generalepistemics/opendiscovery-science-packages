@@ -38790,7 +38790,7 @@ function reverseComplement(sequence) {
 }
 
 // src/version.ts
-var SEQUENCE_VIEWER_VERSION = "0.1.44";
+var SEQUENCE_VIEWER_VERSION = "0.1.45";
 
 // src/workspace-atomic-publisher.ts
 import { randomUUID as randomUUID2 } from "node:crypto";

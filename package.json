@@ -1,6 +1,6 @@
 {
   "name": "@epistemics/opendiscovery-sequence-viewer",
-  "version": "0.1.44",
+  "version": "0.1.45",
   "private": true,
   "type": "module",
   "scripts": {
@@ -49,7 +49,7 @@
       "panel": {
         "id": "sequence-viewer",
         "name": "Sequence Viewer",
-        "icon": "dna"
+        "icon": "assets/opendiscovery.svg"
       },
       "mcpServers": [
         {
