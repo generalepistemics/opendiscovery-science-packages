@@ -1,0 +1,20 @@
+{
+  "client_id": "https://cdn.jsdelivr.net/gh/generalepistemics/opendiscovery-science-packages@main/oauth/opendiscovery-local-v1.json",
+  "client_name": "OpenDiscovery",
+  "client_uri": "https://github.com/generalepistemics/opendiscovery-releases",
+  "redirect_uris": [
+    "http://127.0.0.1:47213/callback",
+    "http://localhost:3000/api/mcp/oauth/callback",
+    "http://localhost:3002/api/mcp/oauth/callback",
+    "http://127.0.0.1:3000/api/mcp/oauth/callback",
+    "http://127.0.0.1:3002/api/mcp/oauth/callback"
+  ],
+  "grant_types": [
+    "authorization_code",
+    "refresh_token"
+  ],
+  "response_types": [
+    "code"
+  ],
+  "token_endpoint_auth_method": "none"
+}
