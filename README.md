@@ -11,17 +11,27 @@ Open **Settings → Skills catalog** and choose an OpenDiscovery collection. Ins
 | Life Sciences Databases | 44 skills for genetics, proteins, pathways, chemistry and clinical evidence |
 | Scientific Research | Nine workflows for evidence review, study design and scientific writing |
 | Adaptyv Workflows | Four companion workflows for the Adaptyv service |
-| Boltz Workflows | Seven companion workflows for molecular prediction and design |
+| Boltz Workflows | Eight companion workflows for molecular prediction, ADME and design |
+| Inductive Workflows | Three workflows for molecular-property prediction and analog comparison |
+| Rowan Workflows | Computational chemistry and biology with workflow references |
+| NVIDIA BioNeMo | 31 skills for NIMs, protein design, genomics and molecular learning |
+| Biohub ESM | Five protein research and model workflow skills |
+| Runpod Workflows | Six compute, deployment and infrastructure skills |
+| Monarch Workflows | Nine account, compute and model workflow skills |
+| Cerebrium | Deployment guidance and runtime references |
+| Modal Setup | Configure the selected engine host and provider account |
+| Baseten Setup | Configure the CLI and official workflow guidance |
+| Pendar Workflows | Three research survey and citation skills |
 
-For applications that do not yet list these sources, add this GitHub repository with branch `skills` in Skills catalog. Choose `skills/life-sciences-databases`, `skills/scientific-research`, `skills/adaptyv-workflows` or `skills/boltz-workflows` as the subpath:
+For applications that do not yet list these sources, add this GitHub repository with branch `skills` in Skills catalog. Choose `skills/life-sciences-databases`, `skills/scientific-research`, `skills/adaptyv-workflows` `skills/boltz-workflows`, `skills/inductive-workflows` or `skills/rowan-workflows` as the subpath:
 
 `generalepistemics/opendiscovery-science-packages#skills`
 
-Each skill includes its required supporting resources. Database helpers require Python 3.10 or newer. Individual databases and external services may require credentials or impose access limits. Optional numerical scripts and manuscript compilation require their documented runtimes.
+Each skill includes its maintained supporting resources. Referenced external runtimes, model repositories and provider documentation remain explicit prerequisites. BioNeMo GPU workflows require their documented hardware, CUDA environments and model inputs; installing guidance does not install model weights. Biohub shared Python helpers require a POSIX engine host; hosted MCP capabilities are separate. Monarch installs its hosted connection with nine companion skills; CLI and other provider API workflows need their documented setup. Database helpers require Python 3.10 or newer. Individual databases and external services may require credentials or impose access limits. Optional numerical scripts and manuscript compilation require their documented runtimes.
 
 ## Service connections
 
-Find science services in **Discover → Science**. Manage their connections in **Settings → Extensions → MCP servers**. Provider accounts and credits are separate from OpenDiscovery. Adaptyv and Boltz each install their connection and companion workflow skills together. Individual companion skills are also available in Skills catalog. Installation does not create a provider account or submit a job.
+Find services in **Discover**, using the Science or Cloud category as appropriate. Manage their connections in **Settings → Extensions → MCP servers**. Provider accounts and credits are separate from OpenDiscovery. Services with companion skills install them together with their MCP connection. Skills-only setup and research collections remain in Skills catalog. Individual companion skills are also available in Skills catalog. Installation does not create a provider account or submit a job.
 
 ## Updates and removal
 
