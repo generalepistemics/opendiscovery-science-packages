@@ -1,0 +1,995 @@
+{
+  "schema_version": 2,
+  "fallback_order": [
+    "canonical_record_url",
+    "sanitized_request_url",
+    "authoritative_homepage_without_linking_the_identifier"
+  ],
+  "skills": {
+    "alphafold-skill": {
+      "source_name": "AlphaFold Protein Structure Database",
+      "homepage_url": "https://alphafold.ebi.ac.uk/",
+      "request_url_prefixes": [
+        "https://alphafold.ebi.ac.uk/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "UniProt accession",
+          "identifier_fields": [
+            "uniprot_accession",
+            "uniprotAccession",
+            "primaryAccession",
+            "accession",
+            "id"
+          ],
+          "template": "https://alphafold.ebi.ac.uk/entry/{id}"
+        }
+      ]
+    },
+    "bgee-skill": {
+      "source_name": "Bgee",
+      "homepage_url": "https://www.bgee.org/",
+      "record_url_templates": []
+    },
+    "bindingdb-skill": {
+      "source_name": "BindingDB",
+      "homepage_url": "https://www.bindingdb.org/",
+      "request_url_prefixes": [
+        "https://bindingdb.org/"
+      ],
+      "record_url_templates": []
+    },
+    "biobankjapan-phewas-skill": {
+      "source_name": "BioBank Japan PheWeb",
+      "homepage_url": "https://pheweb.jp/",
+      "record_url_templates": [
+        {
+          "identifier_type": "variant",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "variant_name",
+            "canonical",
+            "variant_identifier",
+            "rsid"
+          ],
+          "template": "https://pheweb.jp/variant/{id}"
+        },
+        {
+          "identifier_type": "phenotype",
+          "identifier_fields": [
+            "phenotype_id",
+            "phenotypeId",
+            "phenotype",
+            "phenocode",
+            "pheno"
+          ],
+          "template": "https://pheweb.jp/pheno/{id}"
+        }
+      ]
+    },
+    "biostudies-arrayexpress-skill": {
+      "source_name": "BioStudies and ArrayExpress",
+      "homepage_url": "https://www.ebi.ac.uk/biostudies/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/biostudies/api/v1"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "study accession",
+          "identifier_fields": [
+            "study_accession",
+            "studyAccession",
+            "study_id",
+            "studyId",
+            "accession",
+            "id"
+          ],
+          "template": "https://www.ebi.ac.uk/biostudies/studies/{id}"
+        }
+      ]
+    },
+    "cbioportal-skill": {
+      "source_name": "cBioPortal",
+      "homepage_url": "https://www.cbioportal.org/",
+      "request_url_prefixes": [
+        "https://www.cbioportal.org/"
+      ],
+      "record_url_templates": []
+    },
+    "cellxgene-skill": {
+      "source_name": "CZ CELLxGENE Discover",
+      "homepage_url": "https://cellxgene.cziscience.com/",
+      "request_url_prefixes": [
+        "https://api.cellxgene.cziscience.com/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "collection ID",
+          "identifier_fields": [
+            "collection_id",
+            "collectionId",
+            "collection_uuid",
+            "uuid",
+            "id"
+          ],
+          "template": "https://cellxgene.cziscience.com/collections/{id}"
+        }
+      ]
+    },
+    "chebi-skill": {
+      "source_name": "ChEBI",
+      "homepage_url": "https://www.ebi.ac.uk/chebi/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/chebi"
+      ],
+      "request_base_urls": [
+        "https://www.ebi.ac.uk"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "ChEBI ID",
+          "identifier_fields": [
+            "chebi_id",
+            "chebiId",
+            "CHEBI",
+            "accession",
+            "id"
+          ],
+          "template": "https://www.ebi.ac.uk/chebi/searchId.do?chebiId={id}"
+        }
+      ]
+    },
+    "chembl-skill": {
+      "source_name": "ChEMBL",
+      "homepage_url": "https://www.ebi.ac.uk/chembl/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/chembl/api/data"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "compound ID",
+          "identifier_fields": [
+            "molecule_chembl_id",
+            "compound_chembl_id",
+            "compound_id",
+            "molecule_id"
+          ],
+          "template": "https://www.ebi.ac.uk/chembl/explore/compound/{id}"
+        },
+        {
+          "identifier_type": "target ID",
+          "identifier_fields": [
+            "target_chembl_id",
+            "target_id",
+            "targetId",
+            "target_ensembl_id",
+            "target"
+          ],
+          "template": "https://www.ebi.ac.uk/chembl/explore/target/{id}"
+        }
+      ]
+    },
+    "civic-skill": {
+      "source_name": "CIViC",
+      "homepage_url": "https://civicdb.org/",
+      "record_url_templates": [
+        {
+          "identifier_type": "variant ID",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "rsid"
+          ],
+          "template": "https://civicdb.org/variants/{id}/summary"
+        },
+        {
+          "identifier_type": "evidence ID",
+          "identifier_fields": [
+            "evidence_id",
+            "evidenceId"
+          ],
+          "template": "https://civicdb.org/evidence/{id}/summary"
+        }
+      ]
+    },
+    "clinicaltrials-skill": {
+      "source_name": "ClinicalTrials.gov",
+      "homepage_url": "https://clinicaltrials.gov/",
+      "record_url_templates": [
+        {
+          "identifier_type": "NCT ID",
+          "identifier_fields": [
+            "nctId",
+            "nct_id",
+            "NCTId",
+            "nctid",
+            "id"
+          ],
+          "template": "https://clinicaltrials.gov/study/{id}"
+        }
+      ]
+    },
+    "clinvar-variation-skill": {
+      "source_name": "ClinVar and NCBI Variation",
+      "homepage_url": "https://www.ncbi.nlm.nih.gov/clinvar/",
+      "record_url_templates": [
+        {
+          "identifier_type": "numeric ClinVar Variation ID",
+          "identifier_fields": [
+            "variation_id",
+            "variationId",
+            "variationID",
+            "vcv",
+            "accession"
+          ],
+          "template": "https://www.ncbi.nlm.nih.gov/clinvar/variation/{id}/",
+          "transform": "strip_clinvar_vcv"
+        },
+        {
+          "identifier_type": "RefSNP ID",
+          "identifier_fields": [
+            "rsid",
+            "rs_id",
+            "refsnp_id",
+            "rs"
+          ],
+          "template": "https://www.ncbi.nlm.nih.gov/snp/{id}"
+        }
+      ]
+    },
+    "efo-ontology-skill": {
+      "source_name": "Experimental Factor Ontology via OLS",
+      "homepage_url": "https://www.ebi.ac.uk/ols4/ontologies/efo",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/ols4/api"
+      ],
+      "record_url_templates": []
+    },
+    "encode-skill": {
+      "source_name": "ENCODE",
+      "homepage_url": "https://www.encodeproject.org/",
+      "request_url_prefixes": [
+        "https://www.encodeproject.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "ENCODE accession",
+          "identifier_fields": [
+            "accession",
+            "encode_accession",
+            "id"
+          ],
+          "template": "https://www.encodeproject.org/{id}/"
+        }
+      ]
+    },
+    "ensembl-skill": {
+      "source_name": "Ensembl",
+      "homepage_url": "https://www.ensembl.org/",
+      "request_url_prefixes": [
+        "https://rest.ensembl.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "stable Ensembl ID",
+          "identifier_fields": [
+            "ensembl_id",
+            "ensemblId",
+            "ensembl_gene_id",
+            "stable_id",
+            "gene_id",
+            "transcript_id",
+            "id"
+          ],
+          "template": "https://www.ensembl.org/id/{id}"
+        }
+      ]
+    },
+    "epigraphdb-skill": {
+      "source_name": "EpiGraphDB",
+      "homepage_url": "https://epigraphdb.org/",
+      "request_url_prefixes": [
+        "https://api.epigraphdb.org/"
+      ],
+      "record_url_templates": []
+    },
+    "eqtl-catalogue-skill": {
+      "source_name": "eQTL Catalogue",
+      "homepage_url": "https://www.ebi.ac.uk/eqtl/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/eqtl/api"
+      ],
+      "record_url_templates": []
+    },
+    "eva-skill": {
+      "source_name": "European Variation Archive",
+      "homepage_url": "https://www.ebi.ac.uk/eva/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/eva/webservices"
+      ],
+      "record_url_templates": []
+    },
+    "finngen-phewas-skill": {
+      "source_name": "FinnGen PheWeb",
+      "homepage_url": "https://r12.finngen.fi/",
+      "record_url_templates": [
+        {
+          "identifier_type": "variant",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "variant_name",
+            "canonical",
+            "variant_identifier",
+            "rsid"
+          ],
+          "template": "https://r12.finngen.fi/variant/{id}"
+        },
+        {
+          "identifier_type": "phenotype",
+          "identifier_fields": [
+            "phenotype_id",
+            "phenotypeId",
+            "phenotype",
+            "phenocode",
+            "pheno"
+          ],
+          "template": "https://r12.finngen.fi/pheno/{id}"
+        }
+      ]
+    },
+    "genebass-gene-burden-skill": {
+      "source_name": "Genebass",
+      "homepage_url": "https://app.genebass.org/",
+      "record_url_templates": []
+    },
+    "gnomad-graphql-skill": {
+      "source_name": "gnomAD",
+      "homepage_url": "https://gnomad.broadinstitute.org/",
+      "record_url_templates": [
+        {
+          "identifier_type": "variant",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "variant_name",
+            "canonical",
+            "variant_identifier",
+            "rsid",
+            "id"
+          ],
+          "template": "https://gnomad.broadinstitute.org/variant/{id}"
+        },
+        {
+          "identifier_type": "gene ID",
+          "identifier_fields": [
+            "gene_id",
+            "geneId",
+            "gene",
+            "gene_symbol",
+            "ensembl_id",
+            "id"
+          ],
+          "template": "https://gnomad.broadinstitute.org/gene/{id}"
+        }
+      ]
+    },
+    "gtex-eqtl-skill": {
+      "source_name": "GTEx Portal",
+      "homepage_url": "https://gtexportal.org/",
+      "record_url_templates": [
+        {
+          "identifier_type": "gene ID",
+          "identifier_fields": [
+            "gene_id",
+            "geneId",
+            "gene",
+            "gene_symbol",
+            "ensembl_id",
+            "id"
+          ],
+          "template": "https://gtexportal.org/home/gene/{id}"
+        }
+      ]
+    },
+    "gwas-catalog-skill": {
+      "source_name": "NHGRI-EBI GWAS Catalog",
+      "homepage_url": "https://www.ebi.ac.uk/gwas/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/gwas/rest/api"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "study accession",
+          "identifier_fields": [
+            "study_accession",
+            "studyAccession",
+            "study_id",
+            "studyId",
+            "accession"
+          ],
+          "template": "https://www.ebi.ac.uk/gwas/studies/{id}"
+        },
+        {
+          "identifier_type": "association accession",
+          "identifier_fields": [
+            "association_accession",
+            "association_id",
+            "associationId"
+          ],
+          "template": "https://www.ebi.ac.uk/gwas/associations/{id}"
+        },
+        {
+          "identifier_type": "variant",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "variant_name",
+            "canonical",
+            "variant_identifier",
+            "rsid"
+          ],
+          "template": "https://www.ebi.ac.uk/gwas/variants/{id}"
+        }
+      ]
+    },
+    "human-protein-atlas-skill": {
+      "source_name": "Human Protein Atlas",
+      "homepage_url": "https://www.proteinatlas.org/",
+      "request_url_prefixes": [
+        "https://www.proteinatlas.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "gene symbol or Ensembl gene ID",
+          "identifier_fields": [
+            "gene_symbol",
+            "geneSymbol",
+            "ensembl_id",
+            "gene",
+            "id"
+          ],
+          "template": "https://www.proteinatlas.org/{id}"
+        }
+      ]
+    },
+    "ipd-skill": {
+      "source_name": "IPD-IMGT/HLA",
+      "homepage_url": "https://www.ebi.ac.uk/ipd/imgt/hla/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/cgi-bin/ipd/api"
+      ],
+      "record_url_templates": []
+    },
+    "metabolights-skill": {
+      "source_name": "MetaboLights",
+      "homepage_url": "https://www.ebi.ac.uk/metabolights/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/metabolights/ws"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "MetaboLights study accession",
+          "identifier_fields": [
+            "study_id",
+            "studyId",
+            "accession",
+            "id",
+            "identifier"
+          ],
+          "template": "https://www.ebi.ac.uk/metabolights/{id}"
+        }
+      ]
+    },
+    "mgnify-skill": {
+      "source_name": "MGnify",
+      "homepage_url": "https://www.ebi.ac.uk/metagenomics/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/metagenomics/api/v1"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "study accession",
+          "identifier_fields": [
+            "study_accession",
+            "studyAccession",
+            "study_id",
+            "studyId",
+            "accession"
+          ],
+          "template": "https://www.ebi.ac.uk/metagenomics/studies/{id}"
+        },
+        {
+          "identifier_type": "analysis accession",
+          "identifier_fields": [
+            "analysis_accession",
+            "analysis_id",
+            "analysisId"
+          ],
+          "template": "https://www.ebi.ac.uk/metagenomics/analyses/{id}"
+        },
+        {
+          "identifier_type": "sample accession",
+          "identifier_fields": [
+            "sample_accession",
+            "sample_id",
+            "sampleId"
+          ],
+          "template": "https://www.ebi.ac.uk/metagenomics/samples/{id}"
+        }
+      ]
+    },
+    "ncbi-clinicaltables-skill": {
+      "source_name": "NCBI Gene via Clinical Tables",
+      "homepage_url": "https://clinicaltables.nlm.nih.gov/",
+      "record_url_templates": [
+        {
+          "identifier_type": "NCBI Gene ID",
+          "identifier_fields": [
+            "gene_id",
+            "geneId",
+            "GeneID",
+            "geneid",
+            "id"
+          ],
+          "template": "https://www.ncbi.nlm.nih.gov/gene/{id}"
+        }
+      ]
+    },
+    "ncbi-datasets-skill": {
+      "source_name": "NCBI Datasets",
+      "homepage_url": "https://www.ncbi.nlm.nih.gov/datasets/",
+      "record_url_templates": [
+        {
+          "identifier_type": "genome accession",
+          "identifier_fields": [
+            "assembly_accession",
+            "genome_accession",
+            "accession"
+          ],
+          "template": "https://www.ncbi.nlm.nih.gov/datasets/genome/{id}/"
+        },
+        {
+          "identifier_type": "NCBI Gene ID",
+          "identifier_fields": [
+            "gene_id",
+            "geneId",
+            "GeneID",
+            "geneid"
+          ],
+          "template": "https://www.ncbi.nlm.nih.gov/gene/{id}"
+        }
+      ]
+    },
+    "ncbi-entrez-skill": {
+      "source_name": "NCBI Entrez",
+      "homepage_url": "https://www.ncbi.nlm.nih.gov/search/",
+      "record_url_templates": [
+        {
+          "identifier_type": "PMID",
+          "identifier_fields": [
+            "pmid",
+            "PMID",
+            "pubmed_id",
+            "pubmedId"
+          ],
+          "template": "https://pubmed.ncbi.nlm.nih.gov/{id}/"
+        },
+        {
+          "identifier_type": "PMCID",
+          "identifier_fields": [
+            "pmcid",
+            "pmc_id",
+            "article_id"
+          ],
+          "template": "https://pmc.ncbi.nlm.nih.gov/articles/{id}/"
+        },
+        {
+          "identifier_type": "DOI",
+          "identifier_fields": [
+            "doi",
+            "DOI",
+            "article_doi",
+            "articleDoi"
+          ],
+          "template": "https://doi.org/{id}"
+        },
+        {
+          "identifier_type": "NCBI Gene ID",
+          "identifier_fields": [
+            "gene_id",
+            "geneId",
+            "GeneID",
+            "geneid"
+          ],
+          "template": "https://www.ncbi.nlm.nih.gov/gene/{id}"
+        },
+        {
+          "identifier_type": "GEO accession",
+          "identifier_fields": [
+            "geo_accession",
+            "accession",
+            "gse",
+            "gsm",
+            "gpl"
+          ],
+          "template": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc={id}"
+        }
+      ]
+    },
+    "opentargets-skill": {
+      "source_name": "Open Targets Platform",
+      "homepage_url": "https://platform.opentargets.org/",
+      "record_url_templates": [
+        {
+          "identifier_type": "target ID",
+          "identifier_fields": [
+            "target_chembl_id",
+            "target_id",
+            "targetId",
+            "target_ensembl_id",
+            "target",
+            "id"
+          ],
+          "template": "https://platform.opentargets.org/target/{id}"
+        },
+        {
+          "identifier_type": "disease ID",
+          "identifier_fields": [
+            "disease_id",
+            "diseaseId",
+            "efo_id",
+            "disease",
+            "id"
+          ],
+          "template": "https://platform.opentargets.org/disease/{id}"
+        }
+      ]
+    },
+    "pharmgkb-skill": {
+      "source_name": "PharmGKB",
+      "homepage_url": "https://www.clinpgx.org/",
+      "request_url_prefixes": [
+        "https://api.clinpgx.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "chemical ID",
+          "identifier_fields": [
+            "chemical_id",
+            "chemicalId",
+            "drug_id"
+          ],
+          "template": "https://www.clinpgx.org/chemical/{id}"
+        },
+        {
+          "identifier_type": "gene ID",
+          "identifier_fields": [
+            "gene_id",
+            "geneId",
+            "gene",
+            "gene_symbol",
+            "ensembl_id"
+          ],
+          "template": "https://www.clinpgx.org/gene/{id}"
+        },
+        {
+          "identifier_type": "variant ID",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "rsid"
+          ],
+          "template": "https://www.clinpgx.org/variant/{id}"
+        }
+      ]
+    },
+    "pride-skill": {
+      "source_name": "PRIDE Archive",
+      "homepage_url": "https://www.ebi.ac.uk/pride/archive/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/pride/ws/archive/v2"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "PRIDE project accession",
+          "identifier_fields": [
+            "accession",
+            "project_accession",
+            "projectAccession",
+            "id"
+          ],
+          "template": "https://www.ebi.ac.uk/pride/archive/projects/{id}"
+        }
+      ]
+    },
+    "proteomexchange-skill": {
+      "source_name": "ProteomeXchange",
+      "homepage_url": "https://www.proteomexchange.org/",
+      "request_url_prefixes": [
+        "https://proteomecentral.proteomexchange.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "ProteomeXchange accession",
+          "identifier_fields": [
+            "accession",
+            "dataset_id",
+            "datasetId",
+            "id"
+          ],
+          "template": "https://proteomecentral.proteomexchange.org/cgi/GetDataset?ID={id}"
+        }
+      ]
+    },
+    "pubchem-pug-skill": {
+      "source_name": "PubChem",
+      "homepage_url": "https://pubchem.ncbi.nlm.nih.gov/",
+      "request_url_prefixes": [
+        "https://pubchem.ncbi.nlm.nih.gov/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "compound CID",
+          "identifier_fields": [
+            "cid",
+            "CID",
+            "compound_cid",
+            "compoundId"
+          ],
+          "template": "https://pubchem.ncbi.nlm.nih.gov/compound/{id}"
+        },
+        {
+          "identifier_type": "substance SID",
+          "identifier_fields": [
+            "sid",
+            "SID",
+            "substance_sid",
+            "substanceId"
+          ],
+          "template": "https://pubchem.ncbi.nlm.nih.gov/substance/{id}"
+        },
+        {
+          "identifier_type": "assay AID",
+          "identifier_fields": [
+            "aid",
+            "AID",
+            "assay_aid",
+            "assayId"
+          ],
+          "template": "https://pubchem.ncbi.nlm.nih.gov/bioassay/{id}"
+        }
+      ]
+    },
+    "quickgo-skill": {
+      "source_name": "QuickGO",
+      "homepage_url": "https://www.ebi.ac.uk/QuickGO/",
+      "request_url_prefixes": [
+        "https://www.ebi.ac.uk/QuickGO/services"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "GO term",
+          "identifier_fields": [
+            "go_id",
+            "goId",
+            "go_term",
+            "goTerm",
+            "accession",
+            "id"
+          ],
+          "template": "https://www.ebi.ac.uk/QuickGO/term/{id}"
+        }
+      ]
+    },
+    "rcsb-pdb-skill": {
+      "source_name": "RCSB Protein Data Bank",
+      "homepage_url": "https://www.rcsb.org/",
+      "request_url_prefixes": [
+        "https://data.rcsb.org/",
+        "https://search.rcsb.org/",
+        "https://www.rcsb.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "PDB ID",
+          "identifier_fields": [
+            "pdb_id",
+            "pdbId",
+            "structure_id",
+            "entry_id",
+            "rcsb_id",
+            "id"
+          ],
+          "template": "https://www.rcsb.org/structure/{id}"
+        }
+      ]
+    },
+    "reactome-skill": {
+      "source_name": "Reactome",
+      "homepage_url": "https://reactome.org/",
+      "request_url_prefixes": [
+        "https://reactome.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "Reactome stable ID",
+          "identifier_fields": [
+            "stId",
+            "stable_id",
+            "reactome_id",
+            "pathway_id",
+            "id"
+          ],
+          "template": "https://reactome.org/content/detail/{id}"
+        }
+      ]
+    },
+    "rhea-skill": {
+      "source_name": "Rhea",
+      "homepage_url": "https://www.rhea-db.org/",
+      "request_url_prefixes": [
+        "https://sparql.rhea-db.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "Rhea numeric ID",
+          "identifier_fields": [
+            "rhea_id",
+            "rheaId",
+            "rhea",
+            "accession",
+            "id"
+          ],
+          "template": "https://www.rhea-db.org/rhea/{id}",
+          "transform": "strip_rhea_prefix"
+        }
+      ]
+    },
+    "rnacentral-skill": {
+      "source_name": "RNAcentral",
+      "homepage_url": "https://rnacentral.org/",
+      "request_url_prefixes": [
+        "https://rnacentral.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "RNAcentral ID",
+          "identifier_fields": [
+            "rnacentral_id",
+            "rnacentralId",
+            "accession",
+            "id"
+          ],
+          "template": "https://rnacentral.org/rna/{id}"
+        }
+      ]
+    },
+    "string-skill": {
+      "source_name": "STRING",
+      "homepage_url": "https://string-db.org/",
+      "request_url_prefixes": [
+        "https://string-db.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "STRING protein identifier",
+          "identifier_fields": [
+            "string_id",
+            "stringId",
+            "preferredName",
+            "protein_id",
+            "id"
+          ],
+          "template": "https://string-db.org/network/{id}"
+        }
+      ]
+    },
+    "tpmi-phewas-skill": {
+      "source_name": "Taiwan Precision Medicine Initiative PheWeb",
+      "homepage_url": "https://pheweb.ibms.sinica.edu.tw/",
+      "record_url_templates": [
+        {
+          "identifier_type": "variant",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "variant_name",
+            "canonical",
+            "variant_identifier",
+            "rsid"
+          ],
+          "template": "https://pheweb.ibms.sinica.edu.tw/variant/{id}"
+        },
+        {
+          "identifier_type": "phenotype",
+          "identifier_fields": [
+            "phenotype_id",
+            "phenotypeId",
+            "phenotype",
+            "phenocode",
+            "pheno"
+          ],
+          "template": "https://pheweb.ibms.sinica.edu.tw/pheno/{id}"
+        }
+      ]
+    },
+    "ukb-topmed-phewas-skill": {
+      "source_name": "UKB-TOPMed PheWeb",
+      "homepage_url": "https://pheweb.org/UKB-TOPMed/",
+      "record_url_templates": [
+        {
+          "identifier_type": "variant",
+          "identifier_fields": [
+            "variant_id",
+            "variantId",
+            "variant",
+            "variant_name",
+            "canonical",
+            "variant_identifier",
+            "rsid"
+          ],
+          "template": "https://pheweb.org/UKB-TOPMed/variant/{id}"
+        },
+        {
+          "identifier_type": "phenotype",
+          "identifier_fields": [
+            "phenotype_id",
+            "phenotypeId",
+            "phenotype",
+            "phenocode",
+            "pheno"
+          ],
+          "template": "https://pheweb.org/UKB-TOPMed/pheno/{id}"
+        }
+      ]
+    },
+    "uniprot-skill": {
+      "source_name": "UniProt",
+      "homepage_url": "https://www.uniprot.org/",
+      "request_url_prefixes": [
+        "https://rest.uniprot.org/"
+      ],
+      "record_url_templates": [
+        {
+          "identifier_type": "UniProtKB accession",
+          "identifier_fields": [
+            "primaryAccession",
+            "uniprot_accession",
+            "uniprotAccession",
+            "accession"
+          ],
+          "template": "https://www.uniprot.org/uniprotkb/{id}/entry"
+        },
+        {
+          "identifier_type": "UniRef cluster",
+          "identifier_fields": [
+            "cluster_id",
+            "uniref_id",
+            "uniref",
+            "id"
+          ],
+          "template": "https://www.uniprot.org/uniref/{id}"
+        },
+        {
+          "identifier_type": "UniParc accession",
+          "identifier_fields": [
+            "upi",
+            "uniparc_id",
+            "uniparc_accession",
+            "accession"
+          ],
+          "template": "https://www.uniprot.org/uniparc/{id}/entry"
+        }
+      ]
+    }
+  }
+}

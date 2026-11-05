@@ -1,0 +1,6 @@
+interface:
+  display_name: "Review Experiment Transition"
+  short_description: "Review and approve one experiment or payment step"
+  default_prompt: "Review this Adaptyv Bio experiment and its quote, then explain the next transition without taking it."
+policy:
+  allow_implicit_invocation: true
