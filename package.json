@@ -1,0 +1,84 @@
+{
+  "name": "@epistemics/opendiscovery-slide-viewer",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "engines": {
+    "node": ">=24.14.0"
+  },
+  "opendiscovery": {
+    "apiVersion": 2,
+    "contributes": {
+      "panel": {
+        "id": "slide-viewer",
+        "name": "Slide Viewer",
+        "icon": "assets/opendiscovery.svg"
+      },
+      "mcpServers": [
+        {
+          "id": "viewer",
+          "type": "local",
+          "runtime": "node",
+          "entry": "runtime/server.mjs",
+          "protocol": "legacy"
+        }
+      ],
+      "skills": [
+        {
+          "id": "slide-viewer",
+          "path": "skills/slide-viewer"
+        }
+      ],
+      "apps": [
+        {
+          "id": "viewer",
+          "title": "Slide Viewer",
+          "server": "viewer",
+          "resourceUri": "ui://slide-viewer/viewer",
+          "placements": [
+            "conversation",
+            "file"
+          ],
+          "fileOpen": {
+            "match": [
+              "*.svs",
+              "*.tif",
+              "*.tiff",
+              "*.dcm",
+              "*.dicom",
+              "*.h5ad"
+            ],
+            "tool": "slide.open_from_chat",
+            "pathArgument": "path"
+          }
+        }
+      ],
+      "capabilities": [
+        "prompt"
+      ]
+    },
+    "engines": {
+      "opendiscovery": ">=2.5.2"
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "bundle": "node scripts/bundle.mjs",
+    "test": "node --test src/host-contract.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.2"
+  },
+  "files": [
+    "runtime",
+    "dist",
+    "skills",
+    "assets",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md",
+    "THIRD_PARTY_LICENSES.txt",
+    "pathology-requirements.txt"
+  ]
+}
