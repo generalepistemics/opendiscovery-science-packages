@@ -1,28 +1,34 @@
-# OpenDiscovery Science Packages
+<p align="center"><picture><source media="(prefers-color-scheme: dark)" srcset="assets/opendiscovery-dark.svg"><img src="assets/opendiscovery-light.svg" width="96" alt="OpenDiscovery"></picture></p>
+<h1 align="center">OpenDiscovery Science</h1>
+<p align="center">Scientific skills, service tools and interactive viewers.</p>
 
-Optional scientific workflows and service packages for OpenDiscovery.
+## Skills
 
-| Package | Includes | Installation source |
-| --- | --- | --- |
-| Life Sciences Databases | 44 database skills, scripts, and source references | `https://github.com/generalepistemics/opendiscovery-science-packages#life-sciences-databases` |
-| Scientific Research | Nine research and writing workflows | `https://github.com/generalepistemics/opendiscovery-science-packages#scientific-research` |
-| Adaptyv Workflows | Four workflows for preparing and tracking experiments | `https://github.com/generalepistemics/opendiscovery-science-packages#adaptyv-workflows` |
-| Boltz | MCP server and seven molecular prediction/design workflows | `https://github.com/generalepistemics/opendiscovery-science-packages#boltz` |
+Open **Settings → Skills catalog** and choose an OpenDiscovery collection. Install individual skills or select several together at user or project scope.
 
-## Install
+| Collection | Includes |
+| --- | --- |
+| Life Sciences Databases | 44 skills for genetics, proteins, pathways, chemistry and clinical evidence |
+| Scientific Research | Nine workflows for evidence review, study design and scientific writing |
+| Adaptyv Workflows | Four companion workflows for the Adaptyv service |
+| Boltz Workflows | Seven companion workflows for molecular prediction and design |
 
-Open **Discover → Science** in a compatible OpenDiscovery release. Select a package, review its contents, and install it. Complete any required activation, runtime setup, or provider sign-in before using its workflows.
+For applications that do not yet list these sources, add this GitHub repository with branch `skills` in Skills catalog. Choose `skills/life-sciences-databases`, `skills/scientific-research`, `skills/adaptyv-workflows` or `skills/boltz-workflows` as the subpath:
 
-For manual installation, open **Settings → Extensions → Apps** and paste the package's installation source above. Each named branch contains a prepared package at its root. The repository's default branch is an index, not an installable package.
+`generalepistemics/opendiscovery-science-packages#skills`
 
-Life Sciences Databases requires Python 3.10 or newer on the engine host and includes its shared HTTP dependencies. Scientific Research's optional numerical scripts and manuscript compilation have additional documented requirements. Boltz requires separate CLI setup and account access. Adaptyv Workflows requires a configured Adaptyv MCP connection.
+Each skill includes its required supporting resources. Database helpers require Python 3.10 or newer. Individual databases and external services may require credentials or impose access limits. Optional numerical scripts and manuscript compilation require their documented runtimes.
+
+## Service connections
+
+Find science services in **Discover → Science**. Manage their connections in **Settings → Extensions → MCP servers**. Provider accounts and credits are separate from OpenDiscovery. Companion skills do not create an account or submit a job.
 
 ## Updates and removal
 
-Use OpenDiscovery's package update action. Packages are versioned independently of the application. Updates that expand requested capabilities require review. Disable or remove a package to withdraw its contributions; project files and remote provider jobs remain separate.
+Refresh a Skills catalog source to read published content. Reinstall an installed skill using the existing conflict controls to apply a reviewed correction. Remove skills through Skills management. Ordinary skills do not use the Apps updater.
 
-## Package contents
+Interactive viewers use their own Apps installation and update lifecycle. Installing a skills collection does not install a viewer.
 
-Each package branch includes its manifest, runtime resources, documentation, applicable notices, and `checksums.json`. Dependencies needed at runtime are included where documented; installation does not run a source build.
+## Notices
 
-Third-party service names identify their respective operators. Provider subscriptions, credits, credentials, and data access are not included.
+Required licenses and source acknowledgements accompany the distributed content. Service names identify their respective providers. The older native skills-only package branches are retained for existing installations; new skills installations use the `skills` branch. Remove an older skills-only App before installing the same skills through Skills catalog to avoid duplicates.
