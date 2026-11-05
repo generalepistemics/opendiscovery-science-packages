@@ -1,0 +1,74 @@
+{
+  "version": "0.1.90",
+  "type": "module",
+  "license": "MIT",
+  "name": "@epistemics/opendiscovery-structure-viewer",
+  "private": true,
+  "opendiscovery": {
+    "apiVersion": 2,
+    "contributes": {
+      "panel": {
+        "id": "structure-viewer",
+        "name": "Structure Viewer",
+        "icon": "atom"
+      },
+      "mcpServers": [
+        {
+          "id": "viewer",
+          "type": "local",
+          "runtime": "node",
+          "entry": "runtime/server.mjs",
+          "protocol": "legacy"
+        }
+      ],
+      "skills": [
+        {
+          "id": "structure-viewer",
+          "path": "skills/structure-viewer"
+        }
+      ],
+      "apps": [
+        {
+          "id": "viewer",
+          "title": "Structure Viewer",
+          "server": "viewer",
+          "resourceUri": "ui://structure-viewer/viewer",
+          "placements": [
+            "conversation",
+            "file"
+          ],
+          "fileOpen": {
+            "match": [
+              "*.pdb",
+              "*.cif",
+              "*.mmcif"
+            ],
+            "tool": "structure.open_from_chat",
+            "pathArgument": "path",
+            "intentArgument": "openIntentId"
+          },
+          "resourceUriTemplate": "ui://structure-viewer/chat/{id}",
+          "openTool": "structure.open_in_side_pane"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "bundle": "node scripts/bundle.mjs",
+    "test": "node --test src/checkpoint-migration.test.mjs src/viewer-command-delivery.test.mjs"
+  },
+  "devDependencies": {
+    "esbuild": "0.27.2"
+  },
+  "files": [
+    "runtime",
+    "dist",
+    "skills",
+    "assets",
+    "examples",
+    "README.md",
+    "LICENSE",
+    "THIRD_PARTY_NOTICES.md"
+  ]
+}
