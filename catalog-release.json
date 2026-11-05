@@ -1,5 +1,5 @@
 {
-  "version": "0.2.1",
+  "version": "0.2.2",
   "collections": {
     "life-sciences-databases": 44,
     "scientific-research": 9,
@@ -9,7 +9,7 @@
   "checksums": {
     "assets/opendiscovery-dark.svg": "6417504d9ccfdd6da8b5ed9856ab7008bb6ec10678b9c9de949e2654ae6518b5",
     "assets/opendiscovery-light.svg": "45f0b52a884ccc1fa301871ba11252e7a0b89221da02bd2b4484b7486cb8d979",
-    "README.md": "ed34d000784f374efd8b312a3b5ae091d2c03fada6447abb757eb04d8508c59d",
+    "README.md": "9772fa3a58a5b2e2d77082b0eebcbbec38bbeef0a192f82d10518eebc21d046c",
     "skills/adaptyv-workflows/index/agents/openai.yaml": "9b7cdc67777a339e2491906bb24cee2a5cb35df9e1e6eca60e824d5a7fed5196",
     "skills/adaptyv-workflows/index/SKILL.md": "bd21b64473e8b2b060f11f945779f0709b50d0f34346e675ad1f052768f45266",
     "skills/adaptyv-workflows/index/THIRD_PARTY_NOTICES.md": "da836def7a6271667747ae82d6d6e52cc80a9ea4ca6bebefc8ae4c792e99ce5c",

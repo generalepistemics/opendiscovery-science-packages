@@ -21,11 +21,11 @@ Each skill includes its required supporting resources. Database helpers require 
 
 ## Service connections
 
-Find science services in **Discover → Science**. Manage their connections in **Settings → Extensions → MCP servers**. Provider accounts and credits are separate from OpenDiscovery. Companion skills do not create an account or submit a job.
+Find science services in **Discover → Science**. Manage their connections in **Settings → Extensions → MCP servers**. Provider accounts and credits are separate from OpenDiscovery. Adaptyv and Boltz each install their connection and companion workflow skills together. Individual companion skills are also available in Skills catalog. Installation does not create a provider account or submit a job.
 
 ## Updates and removal
 
-Refresh a Skills catalog source to read published content. Reinstall an installed skill using the existing conflict controls to apply a reviewed correction. Remove skills through Skills management. Ordinary skills do not use the Apps updater.
+Refresh a Skills catalog source to read published content. To apply a correction, preserve local edits, remove the installed copy through Skills management and install it from the refreshed source. Existing destination conflicts use the normal confirmation controls. Remove skills through Skills management. Ordinary skills do not use the Apps updater.
 
 Interactive viewers use their own Apps installation and update lifecycle. Installing a skills collection does not install a viewer.
 
