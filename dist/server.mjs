@@ -67222,7 +67222,7 @@ var ScientificViewerDiscoveryRegistry = class {
 // src/runtime-contract.mjs
 var STRUCTURE_VIEWER_RUNTIME = {
   appName: "structure-viewer",
-  appVersion: "0.1.90",
+  appVersion: "0.1.91",
   molstarVersion: "5.11.0",
   protocolVersion: "2026-01-26"
 };
@@ -67332,8 +67332,8 @@ var STRUCTURE_VIEWER_TOOLS = {
   validateRenderer: "structure.validate_renderer",
   waitForCommand: "structure.wait_for_viewer_command"
 };
-var ARTIFACT_PROXY_ENVELOPE_BYTES = 280 * 1024;
-var ARTIFACT_CHUNK_BASELINE_BYTES = 192 * 1024;
+var ARTIFACT_PROXY_ENVELOPE_BYTES = 120 * 1024;
+var ARTIFACT_CHUNK_BASELINE_BYTES = 64 * 1024;
 var ARTIFACT_CHUNK_PROTOCOL_HEADROOM_BYTES = 8 * 1024;
 function maximumArtifactChunkBytes({
   proxyEnvelopeBytes = ARTIFACT_PROXY_ENVELOPE_BYTES,
@@ -67408,7 +67408,7 @@ var STRUCTURE_VIEWER_LIMITS = {
     maxChunkBytes: maximumArtifactChunkBytes(),
     maxStreamingRetainedBytes: 2 * 1024 * 1024,
     streamingMemoryReservationBytes: 2 * 1024 * 1024,
-    maxOneShotBytes: 180 * 1024,
+    maxOneShotBytes: 64 * 1024,
     proxyEnvelopeBytes: ARTIFACT_PROXY_ENVELOPE_BYTES,
     diskSafetyReserveBytes: 256 * 1024 * 1024,
     uploadTtlMs: 15 * 6e4
@@ -69557,7 +69557,7 @@ var MINIMUM_RMSD_ATOM_PAIRS = 3;
 
 // src/structure/structural-analysis.mjs
 var structureMeasurementKindSchema = external_exports3.enum(["distance", "angle", "dihedral"]);
-var structureAnalysisKindSchema = external_exports3.enum(["contacts", "clashes", "hydrogen_bonds", "rmsd", "centroid", "principal_axes", "best_fit_plane", "sasa", "buried_area", "density_fit", "map_correlation", "trajectory_series"]);
+var structureAnalysisKindSchema = external_exports3.enum(["contacts", "clashes", "hydrogen_bonds", "rmsd", "centroid", "principal_axes", "best_fit_plane", "sasa", "buried_area", "density_fit", "density_statistics", "map_correlation", "trajectory_series"]);
 function formatStructureMeasurementLabel(kind, value, unit2) {
   return `${kind} ${value.toFixed(3)} ${unit2 === "angstrom" ? "\xC5" : "\xB0"}`;
 }
@@ -70346,7 +70346,7 @@ var structureSceneAnalysisRecordSchema = external_exports3.object({
   id: sceneIdentifierSchema,
   invalidatedAtRevision: external_exports3.number().int().positive().nullable().default(null),
   invalidationReason: external_exports3.string().trim().min(1).max(500).nullable().default(null),
-  kind: external_exports3.enum(["contacts", "clashes", "hydrogen_bonds", "rmsd", "centroid", "principal_axes", "best_fit_plane", "sasa", "buried_area", "density_fit", "map_correlation", "trajectory_series"]),
+  kind: external_exports3.enum(["contacts", "clashes", "hydrogen_bonds", "rmsd", "centroid", "principal_axes", "best_fit_plane", "sasa", "buried_area", "density_fit", "density_statistics", "map_correlation", "trajectory_series"]),
   nextCursor: external_exports3.string().max(256).nullable().default(null),
   provenance: external_exports3.string().trim().min(1).max(1e3),
   resultCount: external_exports3.number().int().nonnegative(),
@@ -70900,6 +70900,12 @@ var structureAnalyzeToolInputSchema = external_exports3.object({
       message: "density_fit requires volumeId.",
       path: ["volumeId"]
     });
+  }
+  if (kind === "density_statistics" && volumeId2 == null) {
+    context.addIssue({ code: "custom", message: "density_statistics requires volumeId.", path: ["volumeId"] });
+  }
+  if (kind === "density_statistics" && selections.length !== 0) {
+    context.addIssue({ code: "custom", message: "density_statistics does not accept atom selections.", path: ["selections"] });
   }
   if (kind === "map_correlation" && volumeIds == null) {
     context.addIssue({
@@ -84729,7 +84735,7 @@ var structureViewerReadRequestSchema = external_exports3.discriminatedUnion("act
 }).strict(), external_exports3.object({
   ...structureAnalyzeToolInputSchema.shape,
   action: external_exports3.literal("analyze"),
-  cursor: external_exports3.string().min(1).max(256)
+  cursor: external_exports3.string().min(1).max(256).optional()
 }).omit({
   sessionId: true
 }).strict()]);
@@ -95111,7 +95117,7 @@ function registerStructureMolecularAgentTools(server, commandStore, options = {}
   });
   K3(server, STRUCTURE_ANALYZE_TOOL_NAME, {
     title: "Analyze Molecular Structure",
-    description: "Run bounded contacts, clashes, valence- and geometry-screened hydrogen bonds, RMSD, centroid, principal-axis, best-fit-plane, SASA, buried-area, or map-correlation analysis. Hydrogen-bond donor/acceptor roles are independent of selection order; endpoints and chosen hydrogen/heavy-atom geometry participants require positive occupancy and compatible alternate locations; and every row reports explicit-H, inferred-H, or protonation-ambiguous confidence plus its assumption and the chosen explicit donor-H identity, alternate location, and occupancy. RMSD requires at least three non-collinear pairs: two atom_ids selections are paired in their requested order; other selections use stable biochemical identity matching and report unmatched or ambiguous atoms. Otherwise unique cross-object candidates must have the same alternate-location label; different isolated conformers are unmatched. Repeated model, symmetry, or alternate-conformer copies are ambiguous because their labels are source-local; use explicit ordered atom IDs to establish intentional correspondence. Buried-area partners must be atom-disjoint; overlap is rejected with atom-count, coverage, and example-ID diagnostics. Spatially indexed SASA publishes live progress, yields during planning and execution for cancellation/deadlines, and rejects work above the advertised atom, sample, neighbor-candidate, and occlusion-check budgets. Residue SASA accepts the entire occluder context plus an optional scoped output subset, absolute/relative exposure thresholds, and authoritative Tien 2013 residue maxima. Returns typed paginated rows with units, provenance, truncation, cursors, and a live result inventory.",
+    description: "Run parser-reported full-grid density statistics for an already loaded volume, or bounded contacts, clashes, valence- and geometry-screened hydrogen bonds, RMSD, centroid, principal-axis, best-fit-plane, SASA, buried-area, density-fit, map-correlation, or trajectory-series analysis. For density_statistics pass volumeId and selections:[]; it returns the decoded grid dimensions, voxel count, minimum/maximum, mean, parser sigma and its renderer-normalization convention, plus source provenance, without transferring the voxel array. The OpenDX parser's sigma is RMS about zero, matching the value used for relative contour normalization; it is not the population standard deviation. Hydrogen-bond donor/acceptor roles are independent of selection order; endpoints and chosen hydrogen/heavy-atom geometry participants require positive occupancy and compatible alternate locations; and every row reports explicit-H, inferred-H, or protonation-ambiguous confidence plus its assumption and the chosen explicit donor-H identity, alternate location, and occupancy. RMSD requires at least three non-collinear pairs: two atom_ids selections are paired in their requested order; other selections use stable biochemical identity matching and report unmatched or ambiguous atoms. Otherwise unique cross-object candidates must have the same alternate-location label; different isolated conformers are unmatched. Repeated model, symmetry, or alternate-conformer copies are ambiguous because their labels are source-local; use explicit ordered atom IDs to establish intentional correspondence. Buried-area partners must be atom-disjoint; overlap is rejected with atom-count, coverage, and example-ID diagnostics. Spatially indexed SASA publishes live progress, yields during planning and execution for cancellation/deadlines, and rejects work above the advertised atom, sample, neighbor-candidate, and occlusion-check budgets. Residue SASA accepts the entire occluder context plus an optional scoped output subset, absolute/relative exposure thresholds, and authoritative Tien 2013 residue maxima. Returns typed paginated rows with units, provenance, truncation, cursors, and a live result inventory.",
     inputSchema: structureAnalyzeToolInputSchema.shape,
     annotations: {
       destructiveHint: false,
@@ -96363,7 +96369,7 @@ function createStructureViewerServer({
     const request = normalizeStructureImageRenderRequest(rawRequest);
     if (rawRequest.scene == null) request.scene = void 0;
     const job = renderJobStore.create(sessionId3, "image");
-    const outputPath = request.destination?.relativePath ?? request.outputPath ?? `renders/structure-${job.jobId.slice(0, 8)}${structureImageFormat(request.format).extension}`;
+    const outputPath = request.destination?.relativePath ?? request.outputPath ?? `structure-${job.jobId.slice(0, 8)}${structureImageFormat(request.format).extension}`;
     renderJobStore.attachCommand(job.jobId, commandStore.enqueue(sessionId3, {
       action: "render_image",
       jobId: job.jobId,
@@ -96558,7 +96564,7 @@ function createStructureViewerServer({
     const request = normalizeStructureMovieRenderRequest(rawRequest);
     if (rawRequest.scene == null) request.scene = void 0;
     const job = renderJobStore.create(sessionId3, "movie");
-    const outputPath = request.destination?.relativePath ?? request.outputPath ?? `renders/structure-${job.jobId.slice(0, 8)}.mp4`;
+    const outputPath = request.destination?.relativePath ?? request.outputPath ?? `structure-${job.jobId.slice(0, 8)}.mp4`;
     renderJobStore.attachCommand(job.jobId, commandStore.enqueue(sessionId3, {
       action: "render_movie",
       jobId: job.jobId,

@@ -1,5 +1,5 @@
 {
-  "version": "0.1.90",
+  "version": "0.1.91",
   "type": "module",
   "license": "MIT",
   "name": "@epistemics/opendiscovery-structure-viewer",
@@ -56,7 +56,7 @@
   "scripts": {
     "build": "node scripts/build.mjs",
     "bundle": "node scripts/bundle.mjs",
-    "test": "node --test src/checkpoint-migration.test.mjs src/viewer-command-delivery.test.mjs"
+    "test": "node --test src/checkpoint-migration.test.mjs src/viewer-command-delivery.test.mjs src/structure/density-statistics.test.mjs"
   },
   "devDependencies": {
     "esbuild": "0.27.2"
