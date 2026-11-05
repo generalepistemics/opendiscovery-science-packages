@@ -67222,7 +67222,7 @@ var ScientificViewerDiscoveryRegistry = class {
 // src/runtime-contract.mjs
 var STRUCTURE_VIEWER_RUNTIME = {
   appName: "structure-viewer",
-  appVersion: "0.1.91",
+  appVersion: "0.1.92",
   molstarVersion: "5.11.0",
   protocolVersion: "2026-01-26"
 };

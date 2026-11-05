@@ -1,5 +1,5 @@
 {
-  "version": "0.1.91",
+  "version": "0.1.92",
   "type": "module",
   "license": "MIT",
   "name": "@epistemics/opendiscovery-structure-viewer",
@@ -10,7 +10,7 @@
       "panel": {
         "id": "structure-viewer",
         "name": "Structure Viewer",
-        "icon": "atom"
+        "icon": "assets/opendiscovery.svg"
       },
       "mcpServers": [
         {
