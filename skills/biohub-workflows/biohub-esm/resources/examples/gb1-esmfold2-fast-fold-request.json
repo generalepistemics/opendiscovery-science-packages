@@ -1,0 +1,15 @@
+{
+  "include_distogram": false,
+  "include_embeddings": false,
+  "include_pae": true,
+  "include_pair_chains_iptm": false,
+  "lm_dropout": 0.3,
+  "lm_mask_pct": 0.1,
+  "model": "esmfold2-fast-2026-05",
+  "msa": null,
+  "msa_column_mask_rate": 0.1,
+  "msa_max_depth": 1024,
+  "num_loops": 20,
+  "num_sampling_steps": 100,
+  "sequence": "MTYKLILNGKTLKGETTTEAVDAATAEKVFKQYANDNGVDGEWTYDDATKTFTVTE"
+}

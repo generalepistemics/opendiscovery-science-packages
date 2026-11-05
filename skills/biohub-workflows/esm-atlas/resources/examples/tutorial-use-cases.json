@@ -1,0 +1,546 @@
+{
+  "schema_version": "1.1",
+  "structure_viewer_contract": {
+    "viewer": "OpenDiscovery Structure Viewer",
+    "unavailable_viewer_fallback": "agent-rendered-image-of-verified-artifact",
+    "routing": {
+      "supported_sequence": "biohub-mcp",
+      "unsupported_structure": "structure-viewer",
+      "exact_artifact": "structure-viewer",
+      "mcp_operational_failure": "report-without-viewer-switch"
+    },
+    "capability": "interactive-molecular-structure-viewing",
+    "request_artifact": "presentation-request.json",
+    "artifact_path": "verified-absolute",
+    "open_intent_field": "openIntentId",
+    "open_intent_policy": "reuse-exact-emitted-value",
+    "open_intent_reuse": "delivery-retry-only",
+    "legacy_open_intent_policy": "generate-new-stable-only-when-request-artifact-missing",
+    "open_policy": "once",
+    "session_policy": "retain-returned-session-within-same-task",
+    "verification": "list-primary-object",
+    "style_when": "ready",
+    "predicted_confidence_style": {
+      "semantic": "predicted-confidence",
+      "source": "coordinate-b-factor"
+    },
+    "timed_out_mutation": "inspect-acknowledged-state-before-retry",
+    "blocked_outcomes": [
+      "pending",
+      "unavailable"
+    ],
+    "scientific_success_independent": true
+  },
+  "mcp_structure_view_contract": {
+    "tool": "ui_show_protein_structure",
+    "server": "biohub",
+    "calls_per_workflow": 1,
+    "repeat_call": "only when the user asks to see the structure again, with the same arguments; a repeated on-demand fold can return different coordinates",
+    "input": "one exact protein sequence of 1 to 4,000 residues; an ESM Atlas miss folds only up to 700 residues",
+    "numbering": "chain A; author_residue_number is the one-based position in the exact sequence passed; expected_residue is the three-letter code at that position",
+    "max_highlights": 32,
+    "highlight_palette": [
+      "#D55E00",
+      "#009E73",
+      "#CC79A7"
+    ],
+    "coordinates": "a stored ESM Atlas prediction or an on-demand fold of the exact sequence; a model hypothesis, not an experimental structure",
+    "presentation": "hosts that render MCP Apps show the interactive Mol* viewer; every host gets the PNG preview when rendering succeeds",
+    "cost": "a public Biohub MCP read; it uses no ESM_API_KEY credits",
+    "on_failure": "report the analysis without a structure view, and name the tool and the reason; record the planned arguments with called false, and after the Biohub MCP is connected make only that view call",
+    "never": [
+      "draw a structure image or a structure map with plotting, rendering, or viewer code",
+      "show other coordinates, such as an experimental PDB entry, in place of the view"
+    ],
+    "scientific_success_independent": true
+  },
+  "source": {
+    "repository": "https://github.com/Biohub/esm",
+    "revision": "ba4d7124864eed323a93bf3cfefcd958f573b75a",
+    "verified_date": "2026-07-14"
+  },
+  "marketplace_default_prompt_ids": [
+    "petase-mutation-landscape",
+    "atp-synthase-sae-map",
+    "glp1r-modified-peptide-complex"
+  ],
+  "surface_contract": {
+    "router_skill": "skills/biohub-esm/GUIDE.md",
+    "routing_reference": "skills/biohub-esm/references/routing.md",
+    "activation_fixture": "examples/activation-cases.json",
+    "specialist_skills": {
+      "esmc": "skills/esmc/GUIDE.md",
+      "esmfold2": "skills/esmfold2/GUIDE.md"
+    }
+  },
+  "target_resolution_policy": {
+    "marketplace_defaults": "The three exact prompts named by marketplace_default_prompt_ids are curated official-tutorial launchers. Before any provider call, disclose the exact pinned tutorial target or construct, route, model, item and request counts, parameters, artifact plan, and available cost information. Selecting a prompt does not authorize target adoption without that disclosure. The PETase prompt authorizes its disclosed, exact 259-request managed runtime and its one Biohub MCP structure view, the ATP-synthase prompt authorizes its disclosed, exact RCSB FASTA, managed, and Atlas requests and its one Biohub MCP structure view, and the GLP-1R prompt authorizes its disclosed, exact one-request managed fold, each once access is configured and without asking first. Every other managed ESMFold2 tutorial fold runs its exact disclosed fold without asking first. Modal, self-hosted, and bulk-transfer work also requires route-specific confirmation.",
+    "tutorial_literals": "Outside the three exact marketplace defaults, use pinned target literals only when the user explicitly requests the named official Biohub tutorial example; otherwise ask for the biological target and inputs instead of silently substituting tutorial data.",
+    "user_supplied_inputs": "A user-supplied A3M or per-chain MSA remains user-supplied. Never replace it with a bundled, downloaded, or pinned tutorial fixture without a separate explicit request."
+  },
+  "use_cases": [
+    {
+      "id": "esmc-mutation-landscape",
+      "tutorial": {
+        "title": "Using ESMC for zero-shot entropy and position analysis of PETase",
+        "url": "https://github.com/Biohub/esm/blob/ba4d7124864eed323a93bf3cfefcd958f573b75a/cookbook/tutorials/esmc_mutation_scoring.ipynb",
+        "main_url": "https://github.com/Biohub/esm/blob/main/cookbook/tutorials/esmc_mutation_scoring.ipynb",
+        "colab_url": "https://colab.research.google.com/github/Biohub/esm/blob/main/cookbook/tutorials/esmc_mutation_scoring.ipynb",
+        "path": "cookbook/tutorials/esmc_mutation_scoring.ipynb",
+        "sha256": "40b49cecb80c18a1076013999a06b90f9f77bb6c06f81789d071335d09ae1482"
+      },
+      "prompts": [
+        {
+          "id": "petase-mutation-landscape",
+          "text": "Map the mutational landscape of PETase and show me where it is most constrained or tolerant."
+        },
+        {
+          "id": "official-petase-mutation-landscape",
+          "text": "Reproduce the official Biohub PETase ESMC mutation-landscape tutorial example."
+        }
+      ],
+      "route": {
+        "skill": "esmc",
+        "execution_route": "biohub",
+        "model_id": "esmc-600m-2024-12",
+        "masked_context_count": 259,
+        "concurrency": "Run the masked contexts concurrently, as https://biohub.ai/learn/getting-started documents: a bounded ThreadPoolExecutor submitting one managed call per context, with auto-batching handled on the backend. Keep the pool bounded and send every request through the plugin's host-pinned managed client so the credential cannot reach another origin.",
+        "routing_reason": "The pinned tutorial runs all 259 masked contexts against the managed API, and the quickstart documents concurrent managed calls as the supported way to do it. Modal is not an option here: the plugin ships no ESMC Modal function, so that route asks the user to deploy one first."
+      },
+      "runtime": {
+        "command": [
+          "<python-3.12-with-pinned-esm>",
+          "<skill-directory>/resources/scripts/biohub_esm.py",
+          "esmc-landscape",
+          "--tutorial",
+          "petase",
+          "--model",
+          "esmc-600m-2024-12",
+          "--max-workers",
+          "16",
+          "--output-dir",
+          "<new-output-dir>"
+        ],
+        "resume_command": [
+          "<python-3.12-with-pinned-esm>",
+          "<skill-directory>/resources/scripts/biohub_esm.py",
+          "esmc-landscape",
+          "--tutorial",
+          "petase",
+          "--model",
+          "esmc-600m-2024-12",
+          "--max-workers",
+          "16",
+          "--output-dir",
+          "<existing-output-dir>",
+          "--resume"
+        ],
+        "checkpoint_contract": "Each position is marked submitting before its request and completed only after an exact-request-bound response checkpoint is atomically published. Explicit --resume reuses verified completed checkpoints, retries only definitively rejected submissions after any Retry-After delay, and refuses to replay indeterminate submissions.",
+        "artifacts": [
+          "raw-responses.json",
+          "mutation-landscape.json",
+          "mutation-landscape.csv",
+          "provenance.json"
+        ]
+      },
+      "execution_policy": [
+        "Disclose the pinned CaPETase literal before adopting it.",
+        "The exact 259-request managed runtime runs once access is configured without asking first. Managed requests may incur cost. Report provider-returned credit or token usage when available; otherwise state that the API did not report usage or cost, and never invent an estimate.",
+        "After the runtime succeeds, the one Biohub MCP structure view in structure_view runs without asking first; it is a public read, not a managed request.",
+        "If execution stops, use only runtime.resume_command. Never replay a position whose prior managed submission is indeterminate."
+      ],
+      "target": {
+        "name": "CaPETase tutorial sequence",
+        "resolution": "pinned-notebook-literal",
+        "sequence": {
+          "literal": "AADNPYQRGPDPTNASIEAATGPFAVGTQPIVGASGFGGGQIYYPTDTSQTYGAVVIVPGFISVWAQLNWLGPRLASQGFVVIGIETSVITDLPDPRGDQALAALDWATTRSPVASRIDRTRLAAAGWSMGGGGLRRAALQRPSLKAIVGMAPWNGERNWSAVTVPTLFFGGSSDAVASPNDHAKPFYNSITRAEKDYIELRNADHFFPTSANTTMAKYFISWLKRWVDNDTRYTQFLCPGPSTGLFAPVSASMNTCPF",
+          "length": 259,
+          "sha256": "9990510bf5621eb513fa2148ede4c3d637c8c85bf276511904170d90e44e7fa9"
+        },
+        "numbering": "One-based residue positions on the exact pinned notebook literal"
+      },
+      "workflow": [
+        "Create exactly one masked context per residue and request sequence logits for every context.",
+        "Remove the one-token BOS offset when mapping returned logits back to one-based biological positions.",
+        "Compute tutorial_full_vocabulary_entropy_bits from logit probabilities over the complete returned vocabulary.",
+        "Compute every canonical substitution score as ln P(alternate | masked context) minus ln P(wild type | masked context)."
+      ],
+      "entropy_metric": {
+        "name": "tutorial_full_vocabulary_entropy_bits",
+        "token_set": "complete returned tokenizer vocabulary, including any control tokens returned by the pinned tutorial path",
+        "log_base": 2,
+        "units": "bits",
+        "distinction": "This notebook-reproduction metric is not the plugin's default canonical-residue entropy and must not be relabeled as biological residue entropy."
+      },
+      "presentation_contract": "mcp_structure_view_contract",
+      "structure_view": {
+        "sequence": "the pinned CaPETase literal in target.sequence",
+        "when": "after the runtime writes mutation-landscape.json",
+        "highlight_groups": [
+          {
+            "label": "most constrained",
+            "residues": "every position in mutation-landscape.json summary.most_constrained",
+            "color": "#D55E00"
+          },
+          {
+            "label": "most tolerant",
+            "residues": "every position in mutation-landscape.json summary.most_tolerant",
+            "color": "#009E73"
+          }
+        ]
+      },
+      "presentation": [
+        "The Biohub MCP structure view of the pinned CaPETase literal, with the most constrained and the most tolerant positions highlighted in their group colors",
+        "Per-position tutorial_full_vocabulary_entropy_bits values, reported as data",
+        "Fraction of the 19 non-wild-type canonical substitutions with a negative LLR",
+        "Canonical-amino-acid by sequence-position LLR values, written to a checksummed artifact; the plugin ships no chart renderer, so present the most constrained and most tolerant positions as a ranked table rather than claiming a heatmap image"
+      ],
+      "plugin_adaptations": [
+        "Exclude the wild-type residue from the substitution-fraction denominator; it has LLR zero and is not a substitution.",
+        "Keep entropy, LLR, residue numbering, model, tokenizer revision, and raw logits bound together in provenance.",
+        "Use the landscape to prioritize experiments, not as a direct measurement of fitness, stability, or activity."
+      ]
+    },
+    {
+      "id": "esmc-sae-feature-interpretation",
+      "tutorial": {
+        "title": "Understanding Proteins with SAE Features",
+        "url": "https://github.com/Biohub/esm/blob/ba4d7124864eed323a93bf3cfefcd958f573b75a/cookbook/tutorials/esmc_sae_feature_interpretation.ipynb",
+        "main_url": "https://github.com/Biohub/esm/blob/main/cookbook/tutorials/esmc_sae_feature_interpretation.ipynb",
+        "colab_url": "https://colab.research.google.com/github/Biohub/esm/blob/main/cookbook/tutorials/esmc_sae_feature_interpretation.ipynb",
+        "path": "cookbook/tutorials/esmc_sae_feature_interpretation.ipynb",
+        "sha256": "4ac0dd7b39d694787f3ce858221f1d045fd225c16c580762e3c2af5919ed59d2"
+      },
+      "prompts": [
+        {
+          "id": "atp-synthase-sae-map",
+          "text": "Show me what ESMC has learned about ATP synthase and map the strongest features onto its structure."
+        },
+        {
+          "id": "official-atp-synthase-sae-map",
+          "text": "Reproduce the official Biohub ATP synthase SAE feature-interpretation tutorial example."
+        }
+      ],
+      "route": {
+        "skill": "esmc",
+        "base_model": "esmc-6b-2024-12",
+        "sae_model": "esmc-6b-2024-12-sae-layer60-k64-codebook16384"
+      },
+      "execution_policy": [
+        "Before any provider call, disclose the RCSB FASTA sequence of PDB 2XND chain A as the target, the exact ESMC and SAE model IDs, item and request counts, parameters, artifacts, and available cost information.",
+        "The exact disclosed requests (one RCSB FASTA, one managed encode, one managed logits, five Atlas feature details, and one Biohub MCP structure view) then run once access is configured without asking first. Managed requests may incur cost. Report provider-returned credit or token usage when available; otherwise state that the API did not report usage or cost, and never invent an estimate."
+      ],
+      "target": {
+        "name": "Mitochondrial ATP synthase F1 alpha subunit tutorial sequence",
+        "pdb_id": "2XND",
+        "chain_id": "A",
+        "sequence_source": "https://www.rcsb.org/fasta/entry/2XND",
+        "author_numbering": "2XND chain A author residue number = one-based sequence position + 18 (DBREF 2XND A 19-510, no insertion codes); highlights use the sequence position, never the author number",
+        "structure_evidence_type": "biohub-mcp-model",
+        "resolution": "Fetch and validate the RCSB FASTA sequence of PDB entry 2XND chain A; do not resolve the generic name ATP synthase to another subunit or species. The Biohub MCP structure view shows a stored ESM Atlas prediction or an on-demand fold of that exact sequence, not the experimental 2XND coordinates. SAE activations and their interpretations are model-derived hypotheses."
+      },
+      "presentation_contract": "mcp_structure_view_contract",
+      "structure_view": {
+        "sequence": "the validated RCSB FASTA sequence of 2XND chain A that ESMC analyzed",
+        "when": "after the rankings exist",
+        "highlight_rule": "For each of the top 3 maximum-activation features in rank order, highlight its 10 highest-activation residues with activation > 0.01 that no higher-ranked feature already highlights; break a tie by the lower position.",
+        "highlight_colors": [
+          "#D55E00",
+          "#009E73",
+          "#CC79A7"
+        ],
+        "record": "structure-view.json"
+      },
+      "reproducibility_contract": {
+        "active_value_threshold": 0.01,
+        "active_value_comparator": ">",
+        "rank_top_k_by_max_activation": 10,
+        "rank_top_k_by_prevalence": 10,
+        "describe_top_k_by_max_activation": 5,
+        "map_top_k_by_max_activation": 3,
+        "highlight_top_k_residues_per_mapped_feature": 10,
+        "managed_requests": {
+          "encode": 1,
+          "logits": 1
+        },
+        "public_data_requests": {
+          "rcsb_fasta": 1,
+          "atlas_feature_detail": 5,
+          "biohub_mcp_structure_view": 1
+        },
+        "tokenization": "managed-encode",
+        "normalize_features": true,
+        "artifacts": [
+          "2xnd-chain-a.fasta",
+          "encode-raw-response.json",
+          "logits-raw-response.json",
+          "sae-features.npz",
+          "feature-rankings.json",
+          "atlas-feature-responses.json",
+          "per-residue-activations.csv",
+          "structure-view.json",
+          "provenance.json"
+        ]
+      },
+      "workflow": [
+        "Fetch and validate the RCSB FASTA sequence of 2XND chain A once.",
+        "Use exactly one managed /api/v1/encode request for tokenization and exactly one managed /api/v1/logits request with normalize_features=true and canonical SAEConfig.models wire syntax; do not substitute local tokenization when reproducing this tutorial.",
+        "Decode the named sparse tensor, densify it, and remove BOS/EOS rows before residue analysis.",
+        "Use the strict active-value predicate activation > 0.01 for prevalence and mean-active magnitude; report the top 10 by maximum activation and top 10 by prevalence.",
+        "Fetch exactly five Atlas descriptions for the top five maximum-activation features in the exact compatible 16,384-feature dictionary, then treat them as generated hypotheses.",
+        "Map exactly the top three maximum-activation features onto the structure with one Biohub MCP structure view of the exact analyzed sequence, as structure_view describes; its residue numbers are one-based positions in that sequence, so it needs no sequence-to-coordinate alignment.",
+        "Record the exact view arguments and the returned descriptor and preview status in structure-view.json, or the planned arguments with called false and the reason when the view could not run, and preserve every named reproducibility artifact."
+      ],
+      "presentation": [
+        "The Biohub MCP structure view of the exact 2XND chain A sequence, with each of the three mapped features highlighted in its own color",
+        "Ranked feature table with peak, prevalence, and mean active magnitude",
+        "Per-residue activation values, written to per-residue-activations.csv; the view highlights each mapped feature's strongest residues, and this file holds every value"
+      ],
+      "plugin_adaptations": [
+        "Extracting SAE activations for a new sequence is an ESMC task; browsing the existing Atlas feature catalog is an Atlas task.",
+        "Never reuse an Atlas feature description for a different SAE checkpoint, base model, layer, or codebook size.",
+        "Record normalization separately because it changes activation scaling and ranking, not feature-index identity.",
+        "The official notebook colors the experimental 2XND coordinates; the plugin shows the Biohub MCP view of the same chain A sequence instead, because the view cannot open a PDB entry or color by a per-residue value.",
+        "Do not assume PDB residue number i equals sequence index i: 2XND chain A author numbers are the one-based sequence positions plus 18, so name residues by sequence position and give the author number when you compare with the PDB entry or the literature."
+      ]
+    },
+    {
+      "id": "esmfold2-all-atom-and-msa",
+      "tutorial": {
+        "title": "ESMFold2",
+        "url": "https://github.com/Biohub/esm/blob/ba4d7124864eed323a93bf3cfefcd958f573b75a/cookbook/tutorials/esmfold2.ipynb",
+        "main_url": "https://github.com/Biohub/esm/blob/main/cookbook/tutorials/esmfold2.ipynb",
+        "colab_url": "https://colab.research.google.com/github/Biohub/esm/blob/main/cookbook/tutorials/esmfold2.ipynb",
+        "path": "cookbook/tutorials/esmfold2.ipynb",
+        "sha256": "efc47094be02ea99c409e09830a1275fc1fe46c46accda2e942bbef876c357b3"
+      },
+      "prompts": [
+        {
+          "id": "rnase-h1-rna-dna-complex",
+          "text": "Show me how RNase H1 engages its RNA-DNA hybrid."
+        },
+        {
+          "id": "ubiquitin-a3m-fold",
+          "text": "Fold ubiquitin with my A3M and show me the structure and confidence."
+        },
+        {
+          "id": "glp1r-modified-peptide-complex",
+          "text": "Model how a modified GLP-1 peptide with a lipid linker might engage GLP-1R, then show me the complex."
+        },
+        {
+          "id": "paired-antibody-antigen-msa",
+          "text": "Use my paired MSAs to model an antibody-antigen complex."
+        },
+        {
+          "id": "official-rnase-h1-rna-dna-complex",
+          "text": "Reproduce the official Biohub RNase H1 RNA-DNA hybrid ESMFold2 tutorial example."
+        },
+        {
+          "id": "official-ubiquitin-a3m-fold",
+          "text": "Using my supplied ubiquitin A3M, follow the official Biohub ESMFold2 tutorial example and show the structure and confidence."
+        },
+        {
+          "id": "official-glp1r-modified-peptide-complex",
+          "text": "Reproduce the official Biohub modified GLP-1 peptide with lipid linker ESMFold2 tutorial example."
+        },
+        {
+          "id": "official-paired-antibody-antigen-msa",
+          "text": "Using my supplied paired antibody-antigen A3Ms, follow the official Biohub ESMFold2 tutorial example."
+        }
+      ],
+      "route": {
+        "skill": "esmfold2",
+        "single_sequence_model": "esmfold2-fast-2026-05",
+        "msa_model": "esmfold2-2026-05"
+      },
+      "execution_policy": [
+        "Before any managed or other paid fold, show the exact route, endpoint, model ID, request count, parameters, pinned construct, chemistry, covalent indices, artifact plan, and available cost information.",
+        "The pinned modified_glp1r_peptide_linker fold then runs its exact one-request managed call once access is configured without asking first. Managed requests may incur cost. Report provider-returned credit or token usage when available; otherwise state that the API did not report usage or cost, and never invent an estimate.",
+        "Every other tutorial target runs its exact disclosed managed call the same way, without asking first."
+      ],
+      "targets": {
+        "rnase_h1_rna_dna_hybrid": {
+          "context_pdb_id": "4H8K",
+          "context_structure_evidence_type": "experimental-reference",
+          "predicted_structure_evidence_type": "model-hypothesis",
+          "execution_contract": {
+            "route": "biohub",
+            "endpoint": "/fold_all_atom",
+            "model_id": "esmfold2-fast-2026-05",
+            "request_count": 1,
+            "config": {
+              "num_loops": 10,
+              "num_sampling_steps": 100,
+              "include_pae": true
+            }
+          },
+          "protein": {
+            "chain_ids": [
+              "A",
+              "B"
+            ],
+            "literal": "MNKIIIYTDGGARGNPGPAGIGVVITDEKGNTLHESSAYIGETTNNVAEYEALIRALEDLQMFGDKLVDMEVEVRMNSELIVRQMQGVYKVKEPTLKEKFAKIAHIKMERVPNLVFVHIPREKNARADELVNEAIDKALS",
+            "length": 140,
+            "sha256": "250fe44fce5176b971e3128b2fb754f2c69612e22db706f296f68727c0b190b5"
+          },
+          "rna": {
+            "chain_id": "C",
+            "literal": "CGACACCUGAUUCC",
+            "length": 14,
+            "sha256": "378c0bc409c8ddd40ef4cb1d47d3e4d462f90b9438eb98292a5ea0e9fae2042b"
+          },
+          "dna": {
+            "chain_id": "D",
+            "literal": "GGAATCAGGTGTCG",
+            "length": 14,
+            "sha256": "d49b42bb1aec56ad90f5e8a6eb4e5751f1b3f256aeee72801c2db78ef353d7ee"
+          }
+        },
+        "ubiquitin_with_a3m": {
+          "predicted_structure_evidence_type": "model-hypothesis",
+          "execution_contract": {
+            "route": "biohub",
+            "endpoint": "/fold_all_atom",
+            "model_id": "esmfold2-2026-05",
+            "request_count": 1,
+            "config": {
+              "num_loops": 10,
+              "num_sampling_steps": 100,
+              "include_pae": true,
+              "msa_max_depth": 1000
+            }
+          },
+          "sequence": {
+            "literal": "MQIFVKTLTGKTITLEVEPSDTIENVKAKIQDKEGIPPDQQRLIFAGKQLEDGRTLSDYNIQKESTLHLVLRLRGG",
+            "length": 76,
+            "sha256": "233b4b0b8c4616095bc3249f9375fc345d32af7deaef07117d0383c51d6f19aa"
+          },
+          "msa_source": "User-supplied A3M; never substitute a tutorial fixture or downloaded alignment unless the user separately requests it",
+          "msa_preprocessing": {
+            "constructor": "MSA.from_a3m",
+            "remove_insertions": true,
+            "max_sequences": 1000,
+            "expected_tutorial_depth": 1000,
+            "validation_cli_flags": [
+              "--require-msa",
+              "--require-msa-insertions-removed",
+              "--msa-max-depth",
+              "1000"
+            ],
+            "query_row_index_zero_based": 0,
+            "query_invariant": "After insertion removal, the ungapped first row must equal the exact chain sequence"
+          }
+        },
+        "modified_glp1r_peptide_linker": {
+          "predicted_structure_evidence_type": "model-hypothesis",
+          "execution_contract": {
+            "route": "biohub",
+            "endpoint": "/fold_all_atom",
+            "model_id": "esmfold2-fast-2026-05",
+            "request_count": 1,
+            "config": {
+              "num_loops": 10,
+              "num_sampling_steps": 100,
+              "include_pae": true
+            }
+          },
+          "receptor": {
+            "source_accession": "UniProt P43220-derived tutorial construct",
+            "construct_note": "Includes the notebook's N-terminal signal/tag/TEV additions and C-terminal tag; it is not canonical untagged GLP1R",
+            "literal": "MKTIIALSYIFCLVFADYKDDDDLEVLFQGPARPQGATVSLWETVQKWREYRRQCQRSLTEDPPPATDLFCNRTFDEYACWPDGEPGSFVNVSCPWYLPWASSVPQGHVYRFCTAEGLWLQKDNSSLPWRDLSECEESKRGERSSPEEQLLFLYIIYTVGYALSFSALVIASAILLGFRHLHCTRNYIHLNLFASFILRALSVFIKDAALKWMYSTAAQQHQWDGLLSYQDSLSCRLVFLLMQYCVAANYYWLLVEGVYLYTLLAFSVFSEQWIFRLYVSIGWGVPLLFVVPWGIVKYLYEDEGCWTRNSNMNYWLIIRLPILFAIGVNFLIFVRVICIVVSKLKANLMCKTDIKCRLAKSTLTLIPLLGTHEVIFAFVMDEHARGTLRFIKLFTELSFTSFQGLMVAILYCFVNNEVQLEFRKSWERWRLEHLHIQRDSSMKPLKCPTSSLSSGATAGSSMYTATCQASCSPAGLEVLFQGPHHHHHHH",
+            "length": 490,
+            "sha256": "895b2b2c92119cbc651ae2925003545705dbad3cbab5de80688a6dbb834f9635"
+          },
+          "peptide": {
+            "literal": "HAEGTFTSDVSSYLEGQAAKEFIAWLVRGRG",
+            "length": 31,
+            "sha256": "9c3b2121509a5cafd90033e7e0fbf2e0a1c1569848dabf7a426100fa57057e58",
+            "modification": {
+              "position_zero_based": 1,
+              "ccd": "AIB"
+            }
+          },
+          "linker": {
+            "identity": "Representative tutorial linker inspired by semaglutide, not the exact therapeutic linker",
+            "smiles": "C(=O)(CCOCCOCC(=O)NCCOCCOCCNCC(=O)N[C@@H](CCC(=O)NCCCCCCCCCCCCCCCCCC(=O)O)C(=O)O)",
+            "sha256": "47adb7a3255be7fa4744a26be1309e2ca4aef600abd9ab68fdd96f0c46783a8a"
+          },
+          "covalent_bond": {
+            "peptide_lysine_index_zero_based": 19,
+            "peptide_atom_index_zero_based": 8,
+            "linker_residue_index_zero_based": 0,
+            "linker_atom_index_zero_based": 0,
+            "validation_scope": "The plugin validator checks nonnegative atom indices and sequence-based residue bounds only; it does not prove atom existence, valence, bond chemistry, or that these tutorial atom indices match a separately parsed molecule."
+          }
+        },
+        "paired_antibody_antigen_msa": {
+          "predicted_structure_evidence_type": "model-hypothesis",
+          "execution_contract": {
+            "route": "biohub",
+            "endpoint": "/fold_all_atom",
+            "model_id": "esmfold2-2026-05",
+            "request_count": 1,
+            "config": {
+              "num_loops": 10,
+              "num_sampling_steps": 100,
+              "include_pae": true,
+              "msa_max_depth": 1000
+            }
+          },
+          "heavy_chain": {
+            "literal": "EVQLVESGGGLVQPGGSLRLSCAASGFNIKDTYIHWVRQAPGKGLEWVARIYPTNGYTRYADSVKGRFTISADTSKNTAYLQMNSLRAEDTAVYYCSRWGGDGFYAMDYWGQGTLVTVSS",
+            "length": 120,
+            "sha256": "8b8998709aa9423e89f2c0b71328bf9702d979ecd1ce6d64a3671c60e353f454"
+          },
+          "light_chain": {
+            "literal": "DIQMTQSPSSLSASVGDRVTITCRASQDVNTAVAWYQQKPGKAPKLLIYSASFLYSGVPSRFSGSRSGTDFTLTISSLQPEDFATYYCQQHYTTPPTFGQGTKVEIK",
+            "length": 107,
+            "sha256": "54785c99f723d6189985caeb5db492bdb8ca3b0f77dd99c7e7b707f0868b4732"
+          },
+          "antigen_chain": {
+            "literal": "MKQLEDKVEELLSKNYHLENEVARLKKLVGER",
+            "length": 32,
+            "sha256": "da485cde19d2dd1285b1d4c37edce7ee0d0bd979a5329a6e6a31875309517d4a"
+          },
+          "msa_source": "One user-supplied A3M per chain; never substitute the pinned tutorial sequences or fixture alignments for the user's chains or MSAs",
+          "msa_preprocessing": {
+            "constructor": "MSA.from_a3m",
+            "remove_insertions": true,
+            "max_sequences": 1000,
+            "validation_cli_flags": [
+              "--require-msa",
+              "--require-msa-insertions-removed",
+              "--require-paired-msa-keys",
+              "--msa-max-depth",
+              "1000"
+            ],
+            "query_row_index_zero_based": 0,
+            "query_invariant": "After insertion removal, each ungapped first row must equal its own chain sequence"
+          },
+          "paired_header_invariant": "The query row has no key token. Each non-query row intended for pairing has exactly one standalone key=<positive-decimal-taxonomy-id> token, at most once per chain; a key produces a paired row only when the same exact token occurs in at least two chain MSAs.",
+          "unpaired_row_policy": "A non-query row with no key token, or a valid key present in only one chain, remains unpaired and must not be described as paired."
+        }
+      },
+      "workflow": [
+        "Represent proteins, repeated protein chains, RNA, DNA, modified residues, ligands, and covalent bonds with StructurePredictionInput.",
+        "Use full ESMFold2 whenever an MSA is supplied; Fast is a single-sequence route.",
+        "Load every tutorial A3M with MSA.from_a3m(..., remove_insertions=True), verify the insertion-removed ungapped first row equals its chain sequence, and preserve every header through the managed request.",
+        "For paired complex MSAs, validate standalone key=<positive-decimal-taxonomy-id> tokens on non-query rows and pair only exact keys shared across chain MSAs.",
+        "Prefer mmCIF for all-atom complexes and preserve pLDDT, pAE, pTM, iPTM, and pair-chain iPTM when returned.",
+        "For a successful fold of one unmodified protein chain within the MCP input limits, first call ui_show_protein_structure once with the exact query sequence and label the view as the Biohub MCP's Atlas or on-demand coordinates rather than the ESMFold2 prediction. Report a missing MCP tool, error, or unavailable preview without switching viewers. For structures outside the MCP input limits, multi-chain complexes, modified residues, ligands, DNA/RNA, or an explicit request for the exact prediction file, consume the validated presentation-request.json and open its verified absolute coordinate artifact automatically through the OpenDiscovery Structure Viewer once with its exact retained openIntentId; generate a new stable ID only for a legacy artifact set without that request file, retain and verify the returned same-task session, request predicted-confidence styling only when ready, and report pending or unavailable presentation separately."
+      ],
+      "presentation_contract": "structure_viewer_contract",
+      "presentation": [
+        "Interactive structure view by chain identity",
+        "Interactive structure view colored by predicted confidence from the coordinate B-factor field",
+        "Chain-aware pAE matrix for complexes"
+      ],
+      "plugin_adaptations": [
+        "Validate the insertion-removed MSA query-first invariant and retain taxonomy headers because removing them destroys paired-MSA semantics.",
+        "Treat modification, residue, and atom indices as zero-based SDK values. The plugin checks nonnegative atom indices and sequence-based residue bounds but does not validate atom existence or bond chemistry; independently verify those indices against the parsed molecular graph before execution.",
+        "Describe a representative linker or tagged construct exactly as supplied rather than presenting it as an exact therapeutic molecule.",
+        "Interpret inter-chain confidence as a model confidence signal, not binding affinity."
+      ]
+    }
+  ]
+}
