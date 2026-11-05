@@ -10,7 +10,8 @@ Install from Discover → Science and approve the declared capabilities.
 Alternatively, use Settings → Extensions → Apps → Add app with the public Git URL:
 
 `https://github.com/generalepistemics/opendiscovery-science-packages#sequence-viewer`
- Open a supported workspace file from Files, or ask the agent to open
+
+Open a supported workspace file from Files, or ask the agent to open
 its exact absolute path. Expand a viewer into the workbench to continue working
 with the same scientific session.
 
@@ -18,27 +19,19 @@ Scientific files use server-owned handles, bounded reads and revision checks.
 They do not pass through the ordinary text editor or the model as whole files.
 State and caches stay inside this installation's private OpenDiscovery directories.
 
-## Development
+## Updates
 
-Use Node.js 24 and the checked-in npm lockfile:
+Open Settings → Extensions → Apps → Check for updates. Review the available
+version and any capability changes before applying an update. Saved viewer data
+belongs to the installation and remains separate from the package files.
 
-```sh
-npm ci
-npm run build
-npm run bundle -- --output-dir bundle/extension
-```
+For an existing folder or ZIP installation, add the Git URL above and confirm
+replacement of the matching App. Keep the same App ID; do not uninstall first.
+Future updates then use that Git source.
 
-The TypeScript application lives in `src/`. Scientific file access, checkpoint
-storage, paged indexing, quality analysis and format helpers live in
-`src/scientific-platform/`.
-
-The bundle command stages the installable extension under `bundle/extension` and
-prints its content digest. ZIP the contents of that directory for installation;
-keep source, development dependencies and runtime state out of the archive.
-
-The build produces the server and self-contained UI under `dist/`. The extension
-launcher starts the built server over stdio. It does not install dependencies or
-read another agent's global configuration at startup.
+The public branch contains the prepared runtime, UI, companion skill and required
+notices. It starts without downloading build dependencies. Maintainers build and
+verify these files from the canonical source repository before publication.
 
 ## Scientific qualification
 
@@ -46,10 +39,9 @@ Registration and successful opening alone do not establish numerical accuracy,
 rendering or export compatibility. Validate the affected scientific workflows and
 published format limits when changing algorithms, persistence or browser code.
 
-Run `npm run test:public-examples-live` to verify acquisition from ENA, Rfam and
-UniProt against pinned scientific expectations. `npm run test:large-workspace`
-checks streaming, cancellation and atomic publication, including an output larger
-than 1 GiB; provide sufficient temporary storage before running it.
+Supported data sources and format limits are described in the capability matrix
+below. Public data availability, browser resources and optional native tools can
+limit individual workflows; the viewer reports those failures explicitly.
 
 Third-party licenses and notices are included in `LICENSE` and
 `THIRD_PARTY_NOTICES.md`.
