@@ -33,6 +33,20 @@ Each skill includes its maintained supporting resources. Referenced external run
 
 Find services in **Discover**, using the Science or Cloud category as appropriate. Manage their connections in **Settings → Extensions → MCP servers**. Provider accounts and credits are separate from OpenDiscovery. Services with companion skills install them together with their MCP connection. Skills-only setup and research collections remain in Skills catalog. Individual companion skills are also available in Skills catalog. Installation does not create a provider account or submit a job.
 
+## Interactive viewers
+
+Choose a viewer in **Discover → Science**, or use **Settings → Extensions → Apps → Add app** with its installation link. Each package includes its interactive App, local MCP tools and companion skill in one installation. Viewers are optional downloads.
+
+| Viewer | Installation link | Use |
+| --- | --- | --- |
+| Sequence Viewer | `https://github.com/generalepistemics/opendiscovery-science-packages#sequence-viewer` | Inspect and annotate biological sequences |
+| Structure Viewer | `https://github.com/generalepistemics/opendiscovery-science-packages#structure-viewer` | Explore molecular structures in 3D |
+| Slide Viewer | `https://github.com/generalepistemics/opendiscovery-science-packages#slide-viewer` | Explore supported microscopy, whole-slide DICOM and spatial AnnData sources |
+
+Review the requested capabilities before enabling a viewer. Open a supported workspace file from **Files**, or ask the agent to open it. Manage updates, disabling and removal through **Apps**. Project outputs remain separate from the installed package.
+
+Slide Viewer requires an application with extension host compatibility **2.5.2 or newer**; older applications reject installation with the required host version. File format variants, codecs and optional scientific workflows have their own requirements. Installing a viewer does not install Python environments, download model weights or authorize remote data access. These tools are intended for research, not clinical diagnosis.
+
 ## Updates and removal
 
 Refresh a Skills catalog source to read published content. To apply a correction, preserve local edits, remove the installed copy through Skills management and install it from the refreshed source. Existing destination conflicts use the normal confirmation controls. Remove skills through Skills management. Ordinary skills do not use the Apps updater.
