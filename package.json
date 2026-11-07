@@ -1,0 +1,56 @@
+{
+  "name": "@epistemics/opendiscovery-excalidraw",
+  "version": "0.1.0",
+  "description": "Draw in .excalidraw and Obsidian .excalidraw.md files right in OpenDiscovery's Files view",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test src"
+  },
+  "dependencies": {
+    "@excalidraw/excalidraw": "0.18.1",
+    "lz-string": "1.5.0",
+    "react": "19.1.1",
+    "react-dom": "19.1.1"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "@types/react": "^19.1.10",
+    "@types/react-dom": "^19.1.7",
+    "happy-dom": "^20.0.0",
+    "typescript": "^5.9.2",
+    "@epistemics/opendiscovery-sdk": "0.1.0-alpha.1"
+  },
+  "opendiscovery": {
+    "apiVersion": 1,
+    "engines": {
+      "opendiscovery": ">=2.5.2"
+    },
+    "contributes": {
+      "panel": {
+        "id": "excalidraw",
+        "name": "Excalidraw",
+        "icon": "icon.svg"
+      },
+      "fileEditors": [
+        {
+          "id": "canvas",
+          "title": "Excalidraw",
+          "match": [
+            "*.excalidraw",
+            "*.excalidraw.md"
+          ],
+          "entry": "editor/index.html"
+        }
+      ]
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/generalepistemics/opendiscovery-science-packages"
+  },
+  "homepage": "https://github.com/generalepistemics/opendiscovery-science-packages/tree/excalidraw"
+}
