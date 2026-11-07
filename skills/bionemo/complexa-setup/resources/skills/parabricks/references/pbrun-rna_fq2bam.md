@@ -164,7 +164,7 @@ not STAR CLI options already covered in the mapping above.
 - Logs do not show genome library, FASTQ pairing, read group, mount, CUDA, or
   memory errors.
 - Refer to `parabricks-rna-validate.md` for differences between Parabricks version 4.7.0 vs 4.6.0
-  
+
 ## Guardrails
 
 - Do not substitute DNA `fq2bam` for RNA-seq alignment.
