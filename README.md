@@ -1,0 +1,52 @@
+# Resource Monitor for OpenDiscovery
+
+See what your machine is doing and how much of it OpenDiscovery takes: CPU and memory for the whole system, for OpenDiscovery and OpenDiscovery Engine with everything they started, and for the dev servers running under them.
+
+The rail panel has live CPU and memory charts and OpenDiscovery's footprint split into the app, OpenDiscovery Engine, and the built-in terminal. What an agent or the terminal started is shown as jobs: one row per command (`bun run dev`, `claude`) with the CPU, memory and ports of everything under it, folded by default; unfold one to see the processes in it worth a look. Dev servers are listed with their ports, who started them, and what they cost. A short readout in the chat's Work Status panel shows the same numbers at a glance. OpenDiscovery versions that draw extension sections themselves build it from the service's `/status` answer, with no page of its own; older ones load `status/index.html`.
+
+Stop on a dev server or a terminal job ends that command with everything it started, so a watcher can't start the server again. Stop all in the Terminal group ends everything running in the terminal and project actions and keeps the tabs open. The service decides what Stop may touch on a fresh read of the tree: OpenDiscovery itself, the OpenDiscovery Engine server, idle shells, and an agent's job that serves no port (a provider CLI, an MCP server) are refused whatever the panel asks. Processes get SIGTERM, and SIGKILL three seconds later if they are still there; on Windows, `taskkill /T` and then `/F`.
+
+## Install
+
+In OpenDiscovery, open Settings → Extensions → Apps and add `https://github.com/generalepistemics/opendiscovery-science-packages.git#resource-monitor`. Approve the local service when asked: the numbers come from a small process OpenDiscovery starts next to the panel.
+
+Web and desktop on the supported Linux and Windows distributions. Mobile, macOS and VS Code delivery are not currently supported.
+
+## How it finds OpenDiscovery's processes
+
+OpenDiscovery starts the extension's service itself, so the service's parent process is the app: the Electron main process on desktop, the server for `opendiscovery serve`. Everything under that process is OpenDiscovery's. OpenDiscovery Engine is the `opendiscovery-engine` child, and the shells under it belong to agents. Processes the app runs in a terminal of their own (the built-in terminal and project actions, even after the shell exec'd into the command) are the terminal group. A process under OpenDiscovery Engine or the terminal that listens on a TCP port is a dev server; OpenDiscovery Engine's own server isn't. The app's other children, such as other extensions' services, listen on ports too and stay in its process list.
+
+Some processes leave the tree. A server that daemonizes itself, or a container started with `docker compose up -d`, belongs to another parent and isn't shown. OpenDiscovery Engine started outside OpenDiscovery, such as a TUI in another terminal or an external OpenDiscovery Engine server you connected to, is listed separately, and the dev servers its agents start aren't detected.
+
+When the connected OpenDiscovery runs on another machine, the monitor shows that machine, where OpenDiscovery Engine and its dev servers actually run.
+
+## What the numbers mean
+
+- CPU is a share of the whole machine on every row: all logical cores together are 100%. On a 16-core machine, OpenDiscovery Engine keeping eight cores busy reads 50%. Activity Monitor and `top` count 100% per core, so their numbers run higher.
+- Memory is resident memory. Pages several processes share, such as Electron's, count in each of them, so the app's total runs a little high.
+- System memory in use is counted the way the OS's own monitor does: app memory, wired and compressed on macOS, total minus available on Linux, used physical memory on Windows.
+
+## Where the numbers come from
+
+| | Processes | Ports | Memory |
+| --- | --- | --- | --- |
+| macOS | `ps` | `lsof` | `vm_stat` |
+| Linux | `/proc` | `/proc/net/tcp` and each process's sockets | `/proc/meminfo` |
+| Windows | one PowerShell kept running (`Get-CimInstance Win32_Process`) | `netstat -ano` | Node's `os` |
+
+Sampling runs every 5 seconds while the panel or the Work Status section is on screen. Listening ports refresh when the watched process IDs change and every 60 seconds while they stay the same. Stop checks listening ports again before ending an agent's job. Twenty seconds after the last view sampling stops, and so does the PowerShell helper on Windows.
+
+## Build
+
+```bash
+bun install --frozen-lockfile
+bun run build   # writes panel/main.js, status/main.js and service/main.js
+bun run test
+bun run typecheck
+```
+
+The built files are committed: OpenDiscovery installs extensions without building them. Bump `version` in `package.json` to ship an update through Git.
+
+## License
+
+MIT

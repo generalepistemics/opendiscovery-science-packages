@@ -1,0 +1,60 @@
+{
+  "name": "@epistemics/opendiscovery-resource-monitor",
+  "version": "0.1.0",
+  "description": "CPU and memory of your machine, of OpenDiscovery and OpenDiscovery Engine with everything they started, and of the dev servers running under them",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "bun run scripts/build.ts",
+    "typecheck": "tsc --noEmit",
+    "test": "bun test src"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.4.2",
+    "typescript": "^5.9.2",
+    "@epistemics/opendiscovery-sdk": "0.1.0-alpha.1"
+  },
+  "opendiscovery": {
+    "apiVersion": 1,
+    "engines": {
+      "opendiscovery": ">=2.5.2"
+    },
+    "contributes": {
+      "panel": {
+        "id": "resource-monitor",
+        "name": "Resource Monitor",
+        "icon": "pulse",
+        "entry": "panel/index.html"
+      },
+      "statusSection": {
+        "entry": "status/index.html",
+        "source": {
+          "path": "/status",
+          "interval": 5000
+        },
+        "title": "Resources",
+        "height": 76
+      },
+      "service": {
+        "entry": "service/main.js",
+        "runtime": "host",
+        "permissions": {
+          "exec": [
+            "ps",
+            "lsof",
+            "vm_stat",
+            "powershell",
+            "netstat",
+            "taskkill"
+          ]
+        }
+      }
+    }
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/generalepistemics/opendiscovery-science-packages"
+  },
+  "homepage": "https://github.com/generalepistemics/opendiscovery-science-packages/tree/resource-monitor"
+}
