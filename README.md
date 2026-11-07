@@ -29,6 +29,31 @@ For applications that do not yet list these sources, add this GitHub repository 
 
 Each skill includes its maintained supporting resources. Referenced external runtimes, model repositories and provider documentation remain explicit prerequisites. BioNeMo GPU workflows require their documented hardware, CUDA environments and model inputs; installing guidance does not install model weights. Biohub shared Python helpers require a POSIX engine host; hosted MCP capabilities are separate. Monarch installs its hosted connection with nine companion skills; CLI and other provider API workflows need their documented setup. Database helpers require Python 3.10 or newer. Individual databases and external services may require credentials or impose access limits. Optional numerical scripts and manuscript compilation require their documented runtimes.
 
+### Analysis and model development
+
+The additional collections use the same Skills catalog and user/project installation controls. Each skill includes its own resource tree and upstream notices. Runtime packages and credentials belong to the selected engine host; installing instructions does not provision compute or install GPU libraries.
+
+| Collection | Skills | Includes |
+| --- | ---: | --- |
+| Molecular Biology & Evolution | 7 | Sequences, phylogenetics, constructs, primers and RNA structure |
+| Single-Cell & Spatial Analysis | 8 | Scanpy, Seurat, AnnData, integration, trajectories and spatial analysis |
+| Bulk Expression & Functional Analysis | 4 | Differential expression, co-expression, enrichment and motifs |
+| Proteomics | 10 | Import, QC, identification, quantification, PTMs and DIA |
+| Metabolomics & Lipidomics | 9 | Spectra, preprocessing, annotation, normalization and pathways |
+| Microbiome & Metagenomics | 8 | Taxonomy, abundance, resistance, function and strains |
+| Cheminformatics & Medicinal Chemistry | 8 | Molecular features, series, filters, docking and pockets |
+| Molecular Dynamics | 4 | Preparation, simulation setup and trajectory analysis |
+| Cell Analysis & Scientific Imaging | 8 | Segmentation, tracking, cytometry, registration and slide processing |
+| Immunoinformatics | 6 | Epitope, MHC, TCR, neoantigen and assay workflows |
+| Study Statistics | 12 | Design, inference, sensitivity, multiplicity and reporting |
+| Atomistic & Computational Chemistry | 5 | ASE and CP2K task guides, xTB, materials and phonons |
+| Scientific Workflows & Reports | 5 | Snakemake, Nextflow, QC and reproducible reports |
+| Scientific Figures | 3 | Scientific plots and protein/DNA diagrams |
+| Model Training | 14 | Data preparation, adapters, distributed training and interpretation |
+| Reinforcement Learning | 5 | GRPO, OpenRLHF, verl, Stable-Baselines3 and PufferLib |
+| Model Evaluation & Serving | 10 | Benchmarks, serving, quantization and experiment tracking |
+| Software Engineering | 9 | Debugging, reviews, tests, packaging, dependencies and SQL |
+
 ## Service connections
 
 Find services in **Discover**, using the Science or Cloud category as appropriate. Manage their connections in **Settings → Extensions → MCP servers**. Provider accounts and credits are separate from OpenDiscovery. Services with companion skills install them together with their MCP connection. Skills-only setup and research collections remain in Skills catalog. Individual companion skills are also available in Skills catalog. Installation does not create a provider account or submit a job.
@@ -56,3 +81,14 @@ Interactive viewers use their own Apps installation and update lifecycle. Instal
 ## Notices
 
 Required licenses and source acknowledgements accompany the distributed content. Service names identify their respective providers. The older native skills-only package branches are retained for existing installations; new skills installations use the `skills` branch. Remove an older skills-only App before installing the same skills through Skills catalog to avoid duplicates.
+
+## Workspace Apps
+
+Excalidraw and Resource Monitor are optional OpenDiscovery-compatible Git packages, maintained alongside this content. They retain their original licenses and use OpenDiscovery’s SDK and service runtime.
+
+| App | Installation link | Use |
+| --- | --- | --- |
+| Excalidraw | `https://github.com/generalepistemics/opendiscovery-science-packages#excalidraw` | Edit Excalidraw and supported Obsidian drawings in Files |
+| Resource Monitor | `https://github.com/generalepistemics/opendiscovery-science-packages#resource-monitor` | Inspect actual host, engine and child-process resource use |
+
+Review requested capabilities before enabling an App. Resource Monitor runs a local service with the current user’s process access; stopping a process is a separate deliberate action.
