@@ -21,6 +21,7 @@ library(ggprism)
 #' @param output_dir Directory to save SoupX outputs
 #' @param auto_estimate Auto-estimate contamination fraction (default: TRUE)
 #' @param contamination_range Range for contamination estimation (default: c(0.01, 0.5))
+#' @param contamination_fraction Previously determined fraction required when auto_estimate is FALSE
 #'
 #' @return Seurat object with corrected counts
 #'
@@ -31,8 +32,19 @@ run_soupx_correction <- function(
   clusters = NULL,
   output_dir = "results/soupx",
   auto_estimate = TRUE,
-  contamination_range = c(0.01, 0.5)
+  contamination_range = c(0.01, 0.5),
+  contamination_fraction = NULL
 ) {
+  if (!is.numeric(contamination_range) || length(contamination_range) != 2L ||
+      any(!is.finite(contamination_range)) || contamination_range[1] < 0 ||
+      contamination_range[2] > 1 || contamination_range[1] >= contamination_range[2]) {
+    stop("contamination_range must contain two increasing finite fractions between 0 and 1")
+  }
+  if (!auto_estimate && (!is.numeric(contamination_fraction) ||
+      length(contamination_fraction) != 1L || !is.finite(contamination_fraction) ||
+      contamination_fraction < 0 || contamination_fraction > 1)) {
+    stop("Provide a previously determined contamination_fraction between 0 and 1 when auto_estimate is FALSE")
+  }
   # Create output directory
   dir.create(output_dir, showWarnings = FALSE, recursive = TRUE)
 
@@ -63,15 +75,13 @@ run_soupx_correction <- function(
   # Estimate contamination
   if (auto_estimate) {
     cat("Auto-estimating contamination fraction...\n")
-    sc <- autoEstCont(sc)
+    sc <- autoEstCont(sc, contaminationRange = contamination_range)
     contamination_fraction <- sc$metaData$rho[1]
     cat(sprintf("Estimated contamination fraction: %.3f (%.1f%%)\n",
                 contamination_fraction, contamination_fraction * 100))
   } else {
-    # Manual estimation
-    cat("Manually estimating contamination fraction...\n")
-    sc <- estimateContamination(sc, tfidfMin = 0.5, verbose = TRUE)
-    contamination_fraction <- sc$fit$rho
+    cat("Applying the supplied contamination fraction...\n")
+    sc <- setContaminationFraction(sc, contamination_fraction)
   }
 
   # Correct counts
@@ -109,11 +119,12 @@ run_soupx_correction <- function(
 #'
 #' @export
 estimate_soup_fraction <- function(seurat_obj) {
-  if (is.null(seurat_obj@misc$soupx)) {
-    warning("No SoupX metadata found in Seurat object")
-    return(0.0)
+  fraction <- seurat_obj@misc$soupx$contamination_fraction
+  if (!is.numeric(fraction) || length(fraction) != 1L || !is.finite(fraction) ||
+      fraction < 0 || fraction > 1) {
+    stop("No valid measured SoupX contamination fraction is available")
   }
-  return(seurat_obj@misc$soupx$contamination_fraction)
+  return(fraction)
 }
 
 

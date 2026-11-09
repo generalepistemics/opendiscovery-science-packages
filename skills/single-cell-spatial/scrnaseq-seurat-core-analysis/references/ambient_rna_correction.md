@@ -186,12 +186,17 @@ adata = run_soupx_python(
 
 **auto_estimate**
 - Automatically estimate contamination (default: TRUE)
-- Alternative: Manual estimation with specified genes
+- When FALSE, supply `contamination_fraction` determined from a prior SoupX analysis. The helper applies it with SoupX's `setContaminationFraction`; it does not substitute another estimator.
 
 **contamination_range**
 - Expected contamination range
 - Default: c(0.01, 0.5)
 - High-soup tissues: c(0.05, 0.5)
+- Passed directly to `autoEstCont` as `contaminationRange`.
+
+**contamination_fraction**
+- Required when `auto_estimate = FALSE`; one finite fraction between 0 and 1.
+- Missing correction metadata is reported as an error, not as zero contamination.
 
 ---
 

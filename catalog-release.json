@@ -1,5 +1,5 @@
 {
-  "version": "0.4.1",
+  "version": "0.4.2",
   "collections": {
     "life-sciences-databases": 44,
     "scientific-research": 9,
@@ -12965,7 +12965,7 @@
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/LICENSE.source": "625f0f619133f89bbbb2abe37369613dfa1885eba1e50d02170deb62bb42cb6b",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/references/2021_Integrated analysis of multimodal single-cell data.pdf": "38cf34af246c2c8fa0815a322426b86324ba8b26f9a64814bc4c6de3f14acc6d",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/references/2023_Dictionary learning for integrative, multimodal and scalable single-cell analysis.pdf": "368738b8762e68c6704532731ab16a22e79f4c29912eb2ddaebe8ad61068e4d0",
-    "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/references/ambient_rna_correction.md": "1a7bc378cbd0579ce85a7f94775fe8b13c6233fecd4bfcee3d17a07f39ceddde",
+    "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/references/ambient_rna_correction.md": "eca4c7768d45fcd83d1434458d363b2c956e45cab5523068e72c7de5670dace5",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/references/common-patterns.md": "748a1046ed35f26b91b2aa47d2be3a2b72f44a8e1b9e9dc91c77ca081b5e824c",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/references/decision-guide.md": "615040b108f40d85e4cae499cb83cd7a05db0f8462363cb2b8899e8d90698550",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/references/integration_methods.md": "a87753a2ab9983010011cdaa46d3f977ce2c6af3df22cf968d5d8d61a04b6d7f",
@@ -12991,7 +12991,7 @@
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/plot_qc.R": "d9706a4b21a139ff1f58fb38fab5255ece06869e53651503acd5954a4e8dd899",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/pseudobulk_de.R": "541ea3da0f8d7e0a0598908cc31a2052374c254e4843e74051ed3b0877b231e5",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/qc_metrics.R": "4dfd1cbdc49536085613f065454ce0d463215efae8d1c1e907c6af6a33febcf8",
-    "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/remove_ambient_rna.R": "9f9b0cb025b51d8b561ec3e16023557e3e2f9dee7c429114bbcbb3fb5f961948",
+    "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/remove_ambient_rna.R": "d0bdf2cf117b7b1a6f74de70a15c5011f7d47f01b450b56cef24c4c0e8406888",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/run_umap.R": "65a1ab32fec2f0fe3ce8420d893c417057c02fa834577bbee6e812fc2fa2af9c",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/scale_and_pca.R": "fa58e273f25bc5dafcb900fddf4bea2fee57cc7a88b9defe835eb62006ab5a0b",
     "skills/single-cell-spatial/scrnaseq-seurat-core-analysis/scripts/setup_and_import.R": "702fe858912f3e83e36d81044c897fe0cb68ad0f2920e7a1492676b1747f9677",
