@@ -1,5 +1,5 @@
 {
-  "version": "0.4.0",
+  "version": "0.4.1",
   "collections": {
     "life-sciences-databases": 44,
     "scientific-research": 9,
@@ -6146,9 +6146,9 @@
     "skills/cheminformatics/pocket-detection/THIRD_PARTY_NOTICES.md": "5fd2163afc782b2106ec3af1d0b801172c762c862353a8443d3b23503d9ebc88",
     "skills/cheminformatics/rdkit/LICENSE.source": "625f0f619133f89bbbb2abe37369613dfa1885eba1e50d02170deb62bb42cb6b",
     "skills/cheminformatics/rdkit/references/api_reference.md": "a786cd2ea7955a253eba04f376770013decde21d88806f3d22c0ff58c84a9cc5",
-    "skills/cheminformatics/rdkit/references/descriptors_reference.md": "c89ea46820a29b21b0f44f833f0cc4712a133ea9989e9311f4ba201bd99c512a",
+    "skills/cheminformatics/rdkit/references/descriptors_reference.md": "4a07fa555cc3208c8cd8fc4b126ccb021be39bd3c1c636eb85f18c69fbbbc79e",
     "skills/cheminformatics/rdkit/references/smarts_patterns.md": "03760a7b75817ad49c97730cd89e535558b8c6a0a897142c873a3f1f94a45028",
-    "skills/cheminformatics/rdkit/scripts/molecular_properties.py": "5d972db092b928f6f72a2499136f5631a4c039a333924b122dbd2895a8b4334e",
+    "skills/cheminformatics/rdkit/scripts/molecular_properties.py": "2cb6f6c5a8287235d4cd95932a0ca8bda40e8ae2cc00e9bc391cc9bdc1322c2a",
     "skills/cheminformatics/rdkit/scripts/similarity_search.py": "0abec11698a0c92161c2253d7e7f6dd3d2dccd4699bb07f2eabeedd455a215ad",
     "skills/cheminformatics/rdkit/scripts/substructure_filter.py": "a4a9b54faecd6ae93f4eec184fe1640c1e94185c13cf6013b81d4422d19a7ca9",
     "skills/cheminformatics/rdkit/SKILL.md": "24af1fdfc62e7ce747e499c38bc318a36afe280b963a775c33e26f5ca3edb43e",
