@@ -29,7 +29,7 @@ package and adapt the example to match the actual API rather than retrying.
 
 ## Processing Pipeline
 
-Standard pipeline: zero/missing handling -> log2 transformation -> normalization -> statistical testing. Fold change and statistical tests operate on log2-transformed, normalized but unscaled data. Pareto or auto-scaling distorts fold change magnitudes -- apply only for multivariate methods (PCA, PLS-DA).
+Standard pipeline: zero/missing handling -> normalization on the method's required scale -> log2 transformation -> statistical testing. PQN uses linear intensities; do not divide log-transformed intensities by PQN factors. Fold change and statistical tests operate on log2-transformed, normalized but unscaled data. Pareto or auto-scaling distorts fold change magnitudes -- apply only for multivariate methods (PCA, PLS-DA).
 
 ### Zero and Missing Value Handling
 
@@ -68,20 +68,31 @@ For pseudocount approach: `log2(x + 1)` avoids NaN but compresses low-intensity 
 | Cyclic loess | Asymmetric DE (more up- than down-regulated) | Robust to assumption violations |
 | None | IS-corrected data; single-batch balanced design | Check PCA on raw log2 data first |
 
-PQN normalization: compute a reference spectrum (median across samples), divide each feature by the reference, take the median of quotients as the per-sample normalization factor.
+PQN normalization: on linear intensities after the chosen missing-value treatment, compute a reference spectrum (median across samples), divide each feature by the reference, and take the median of quotients as the per-sample normalization factor. Divide linear intensities by that factor, then log2-transform. Exclude features without a positive finite reference and reject samples without a positive finite factor. See [Dieterle et al. (2006)](https://doi.org/10.1021/ac051632c).
 
 ```python
-reference = log2_data.median(axis=1)
-quotients = log2_data.div(reference, axis=0)
+linear_data = intensities.replace(0, np.nan)
+reference = linear_data.median(axis=1)
+linear_data = linear_data.loc[np.isfinite(reference) & (reference > 0)]
+reference = reference.loc[linear_data.index]
+quotients = linear_data.div(reference, axis=0)
 norm_factors = quotients.median(axis=0)
-normalized = log2_data.div(norm_factors, axis=1)
+if not (np.isfinite(norm_factors) & (norm_factors > 0)).all():
+    raise ValueError('PQN requires a positive finite factor for every sample')
+normalized = np.log2(linear_data.div(norm_factors, axis=1))
 ```
 
 ```r
-reference <- apply(log2_matrix, 1, median, na.rm = TRUE)
-quotients <- sweep(log2_matrix, 1, reference, '/')
+linear_matrix <- intensity_matrix
+linear_matrix[linear_matrix == 0] <- NA
+reference <- apply(linear_matrix, 1, median, na.rm = TRUE)
+keep <- is.finite(reference) & reference > 0
+linear_matrix <- linear_matrix[keep, , drop = FALSE]
+reference <- reference[keep]
+quotients <- sweep(linear_matrix, 1, reference, '/')
 norm_factors <- apply(quotients, 2, median, na.rm = TRUE)
-normalized <- sweep(log2_matrix, 2, norm_factors, '/')
+stopifnot(all(is.finite(norm_factors) & norm_factors > 0))
+normalized <- log2(sweep(linear_matrix, 2, norm_factors, '/'))
 ```
 
 **When normalization hurts:** Drug studies and extreme phenotypes can cause global metabolic shifts affecting >50% of features, violating the "majority stable" assumption. This is more common in metabolomics than proteomics because metabolic networks are tightly coupled. Check PCA on raw log2 data first -- if dominant variation corresponds to the biological factor AND global shifts are expected, skip or attenuate normalization.

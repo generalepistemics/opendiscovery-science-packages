@@ -1,5 +1,5 @@
 {
-  "version": "0.4.2",
+  "version": "0.4.3",
   "collections": {
     "life-sciences-databases": 44,
     "scientific-research": 9,
@@ -11601,7 +11601,7 @@
     "skills/metabolomics-analysis/bio-metabolomics-statistical-analysis/examples/metabolomics_differential.py": "6eed7aca02fc35f8d1c11a8b8423b771be1ef0d09b9fea0e728959232091f048",
     "skills/metabolomics-analysis/bio-metabolomics-statistical-analysis/examples/metabolomics_stats.R": "0de51ee329c86b242dfea11a9c0cbba824106534e79e2d012e5911a385bacdb3",
     "skills/metabolomics-analysis/bio-metabolomics-statistical-analysis/LICENSE.source": "625f0f619133f89bbbb2abe37369613dfa1885eba1e50d02170deb62bb42cb6b",
-    "skills/metabolomics-analysis/bio-metabolomics-statistical-analysis/SKILL.md": "9a27d3405a28ef4ad9f1284a07d3284702357208c90bd392b3623e53041511f3",
+    "skills/metabolomics-analysis/bio-metabolomics-statistical-analysis/SKILL.md": "f207a6ad71d72b28d264b0b2b72395166f1f558f56535219ad5de329eb696665",
     "skills/metabolomics-analysis/bio-metabolomics-statistical-analysis/THIRD_PARTY_NOTICES.md": "ba70ca8e13b5587f1aae9f7d46201ca3b31e7c8fffad4adb2bc799fee3edcc51",
     "skills/metabolomics-analysis/bio-metabolomics-statistical-analysis/usage-guide.md": "32afcb17577ba3017a8341bc62aeb6573a28e4e38b1031aabcd4574b06d7ac26",
     "skills/metabolomics-analysis/bio-metabolomics-targeted-analysis/examples/targeted_quantification.R": "7cede86f6154eeca905d4ee9a18074ca923948385a64d597b1277e406e5cdb64",
